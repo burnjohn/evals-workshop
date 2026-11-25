@@ -1,21 +1,9 @@
 {
   "how": "Copy it from plan.md: who runs each task, on which model, with which skills, what it waits for, and the stages after the tasks.",
   "tasks": {
-    "T1": {
-      "model": "sonnet",
-      "skills": [
-        "api-rules"
-      ],
-      "after": []
-    },
-    "T2": {
-      "model": "sonnet",
-      "skills": [
-        "ui-rules"
-      ],
-      "after": []
-    },
-    "T3": "TODO: read T3 in plan.md: model, skills, after"
+    "T1": { "model": "sonnet", "skills": ["api-rules"], "after": [] },
+    "T2": { "model": "sonnet", "skills": ["ui-rules"], "after": [] },
+    "T3": { "model": "haiku", "skills": ["api-rules", "db-rules"], "after": ["T1"] }
   },
-  "stages": "TODO: the stages after the tasks, in order"
+  "stages": ["code-review", "test-writer", "qa", "make-release"]
 }
