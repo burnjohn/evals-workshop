@@ -1,13 +1,14 @@
-# You are on `lab-1a-done`
+# You are on `lab-1b-start`
 
-## Lab 1A · `make-release`: what did it do?
-Read `labs/lab-1a-release/README.md` first.
+## Lab 1B · `code-review`: what did it find, miss and invent?
+Read `labs/lab-1b-review/README.md` first.
 
-**The answer key is complete. Run it.**
+**Your job: the answer key.** Read `prs/3-dashboard.patch` and `spec.md`. It has 3 defects. Write them in `expected.json` under `3-dashboard`: id, file, lines, what.
 
 ```bash
-npm test -- lab-1a
-npm run break -- lab-1a      # 1 red: it published 1.5.0
+npm run show -- lab-1b       # read the input and what the agent did
+npm test -- lab-1b           # your todos show up here
+npm run break -- lab-1b      # the same checks after a harmless-looking edit
 ```
 
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
