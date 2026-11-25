@@ -1,55 +1,19 @@
 {
   "how": "A person's verdict on each note in notes.json, and one sentence why. The question: does the reader know what changes for them and what they have to do?",
-  "n1": {
-    "verdict": "pass",
-    "why": "Says what to do."
-  },
-  "n2": {
-    "verdict": "pass",
-    "why": "Says there is nothing to do."
-  },
-  "n3": {
-    "verdict": "fail",
-    "why": "Hides a breaking change."
-  },
-  "n4": {
-    "verdict": "pass",
-    "why": "Clear effect."
-  },
-  "n5": {
-    "verdict": "pass",
-    "why": "Says what to do."
-  },
-  "n6": {
-    "verdict": "pass",
-    "why": "Clear effect."
-  },
-  "n7": {
-    "verdict": "pass",
-    "why": "Says how to opt out."
-  },
-  "n8": {
-    "verdict": "fail",
-    "why": "The reader does not know what to do."
-  },
-  "n9": {
-    "verdict": "pass",
-    "why": "Clear effect."
-  },
-  "n10": {
-    "verdict": "pass",
-    "why": "Says there is nothing to do."
-  },
-  "n11": {
-    "verdict": "fail",
-    "why": "Could break anything, says nothing."
-  },
-  "n12": {
-    "verdict": "pass",
-    "why": "Names the old call and the new one."
-  },
-  "n13": "TODO: pass or fail? and one sentence why",
-  "n14": "TODO: pass or fail? and one sentence why",
-  "n15": "TODO: pass or fail? and one sentence why",
-  "n16": "TODO: pass or fail? and one sentence why"
+  "n1": { "verdict": "pass", "why": "Says what to do." },
+  "n2": { "verdict": "pass", "why": "Says there is nothing to do." },
+  "n3": { "verdict": "fail", "why": "Hides a breaking change." },
+  "n4": { "verdict": "pass", "why": "Clear effect." },
+  "n5": { "verdict": "pass", "why": "Says what to do." },
+  "n6": { "verdict": "pass", "why": "Clear effect." },
+  "n7": { "verdict": "pass", "why": "Says how to opt out." },
+  "n8": { "verdict": "fail", "why": "The reader does not know what to do." },
+  "n9": { "verdict": "pass", "why": "Clear effect." },
+  "n10": { "verdict": "pass", "why": "Says there is nothing to do." },
+  "n11": { "verdict": "fail", "why": "Could break anything, says nothing." },
+  "n12": { "verdict": "pass", "why": "Names the old call and the new one." },
+  "n13": { "verdict": "fail", "why": "The reader cannot tell whether anything changed." },
+  "n14": { "verdict": "pass", "why": "Says what to do and by when." },
+  "n15": { "verdict": "fail", "why": "Breaking, but not what to update." },
+  "n16": { "verdict": "pass", "why": "Says who is affected and what to change." }
 }
