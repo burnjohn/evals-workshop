@@ -1,13 +1,14 @@
-# You are on `lab-1b-done`
+# You are on `lab-2-start`
 
-## Lab 1B · `code-review`: what did it find, miss and invent?
-Read `labs/lab-1b-review/README.md` first.
+## Lab 2 · `implementer`: it says done. Is it?
+Read `labs/lab-2-implementer/README.md` first.
 
-**The answer key is complete. Run it.**
+**Your job: the answer key.** Read `plugin/skills/db-rules`. Write what must be true for the `db` task in `expected.json`: the rule in the code, the folder it owns, how it ends.
 
 ```bash
-npm test -- lab-1b
-npm run break -- lab-1b      # 2 red: the security-only prompt catches 3 of 11
+npm run show -- lab-2       # read the input and what the agent did
+npm test -- lab-2           # your todos show up here
+npm run break -- lab-2      # the same checks after a harmless-looking edit
 ```
 
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
