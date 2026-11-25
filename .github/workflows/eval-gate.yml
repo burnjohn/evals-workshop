@@ -25,6 +25,9 @@ jobs:
       - run: npx vitest run labs/lab- labs/judge
   eval-gate:                       # the one required check
     needs: [static, replay]
+    if: always()                   # without this it is skipped when a job fails, and GitHub counts skipped as success
     runs-on: ubuntu-latest
     steps:
-      - run: echo "all evals passed"
+      - run: |
+          echo "static: ${{ needs.static.result }} · replay: ${{ needs.replay.result }}"
+          [ "${{ needs.static.result }}" = success ] && [ "${{ needs.replay.result }}" = success ]

@@ -1,8 +1,20 @@
-# You are on `gate-start`
+# You are on `gate-done`
 
 ## Merge gate
-`.github/workflows/eval-gate.yml` runs every eval on each pull request. Its last job, `eval-gate`, is the required check.
+`eval-gate` now always runs, and fails unless every job succeeded.
 
-**Find out why it can't go red, and fix it.** What does GitHub do with a job whose `needs` failed? How does it count a skipped job?
+Make it required: **Settings → Rules → Rulesets → Require status checks → `eval-gate`**. On a free plan that needs a public repository. Protect `gate-done`, because the workflow is not on `main`.
 
-Stuck? `npm run step done`
+See it stop a pull request:
+
+```bash
+git switch -c my-edit
+# in plugin/skills/make-release/SKILL.md, step 1: read commit titles only (labs/lab-1a-release/break.diff)
+git commit -am "Reword the release skill"
+git push -u origin my-edit
+gh pr create --base gate-done --fill     # or open it on GitHub
+```
+
+The saved runs were made with the old prompt, so `static` goes red: the eval has not run. Branch `demo-red-pr` has this edit ready.
+
+The live judge is in `.github/workflows/judge-live.yml`: start it by hand.
