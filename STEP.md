@@ -1,13 +1,14 @@
-# You are on `lab-2-done`
+# You are on `lab-3-start`
 
-## Lab 2 · `implementer`: it says done. Is it?
-Read `labs/lab-2-implementer/README.md` first.
+## Lab 3 · workflow: who did what, and when?
+Read `labs/lab-3-workflow/README.md` first.
 
-**The answer key is complete. Run it.**
+**Your job: the answer key.** Copy T3 and the stages from `plan.md` into `expected.json`.
 
 ```bash
-npm test -- lab-2
-npm run break -- lab-2      # 4 red: the tests never ran, and a hidden test fails
+npm run show -- lab-3       # read the input and what the agent did
+npm test -- lab-3           # your todos show up here
+npm run break -- lab-3      # the same checks after a harmless-looking edit
 ```
 
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
