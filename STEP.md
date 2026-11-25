@@ -1,14 +1,13 @@
-# You are on `lab-2-start`
+# You are on `lab-2-done`
 
 ## Lab 2 · `implementer`: it says done. Is it?
 Read `labs/lab-2-implementer/README.md` first.
 
-**Your job: the answer key.** Read `plugin/skills/db-rules`. Write what must be true for the `db` task in `expected.json`: the rule in the code, the folder it owns, how it ends.
+**The answer key is complete. Run it.**
 
 ```bash
-npm run show -- lab-2       # read the input and what the agent did
-npm test -- lab-2           # your todos show up here
-npm run break -- lab-2      # the same checks after a harmless-looking edit
+npm test -- lab-2
+npm run break -- lab-2      # 4 red: the tests never ran, and a hidden test fails
 ```
 
-Stuck? `npm run step done`
+To label it yourself: `npm run step start`. Onwards: `npm run step next`

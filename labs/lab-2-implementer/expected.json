@@ -1,23 +1,7 @@
 {
   "how": "For each task: the text from the house-rule skill that must be in the code, the folders it may change, and how it must end. The rule comes from the skill, not from what the agent wrote.",
-  "api": {
-    "rule": "code: \"E_",
-    "owned": [
-      "api/"
-    ],
-    "status": "done"
-  },
-  "ui": {
-    "rule": "data-track",
-    "owned": [
-      "web/"
-    ],
-    "status": "done"
-  },
-  "db": "TODO: read plugin/skills/db-rules/SKILL.md. Which text must be in the code? Which folder may change? done or blocked?",
-  "impossible": {
-    "rule": null,
-    "owned": [],
-    "status": "blocked"
-  }
+  "api": { "rule": "code: \"E_", "owned": ["api/"], "status": "done" },
+  "ui": { "rule": "data-track", "owned": ["web/"], "status": "done" },
+  "db": { "rule": "archived_at", "owned": ["db/"], "status": "done" },
+  "impossible": { "rule": null, "owned": [], "status": "blocked" }
 }
