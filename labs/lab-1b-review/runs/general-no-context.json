@@ -1,0 +1,131 @@
+{
+ "real": true,
+ "reviewer": "general",
+ "context": "diff only",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:30:31.146Z",
+ "costUsd": 0.0173,
+ "seconds": 28,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "server/src/configs/analytics.js",
+   "start_line": 2,
+   "end_line": 3,
+   "severity": "CRITICAL",
+   "title": "Hardcoded secrets committed to the repository"
+  },
+  {
+   "file": "client/src/components/admin/analytics/ExportButton.jsx",
+   "start_line": 5,
+   "end_line": 5,
+   "severity": "CRITICAL",
+   "title": "Client imports a server secret, leaking it into the browser bundle"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "Authorization header (JWT) written to logs"
+  },
+  {
+   "file": "server/migrations/20260211000001-add-blogview-indexes.js",
+   "start_line": 39,
+   "end_line": 39,
+   "severity": "CRITICAL",
+   "title": "Migration down() drops the entire collection, destroying data"
+  },
+  {
+   "file": "client/vite.config.js",
+   "start_line": 12,
+   "end_line": 14,
+   "severity": "CRITICAL",
+   "title": "define replaces process.env with the full environment, exposing all secrets to the client"
+  },
+  {
+   "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+   "start_line": 48,
+   "end_line": 48,
+   "severity": "CRITICAL",
+   "title": "Stored XSS: user comment content rendered as HTML"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 655,
+   "end_line": 655,
+   "severity": "WARNING",
+   "title": "Visitor key is taken from the request body, allowing dedup bypass"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 693,
+   "end_line": 699,
+   "severity": "WARNING",
+   "title": "Duplicate view returns 400 instead of 200"
+  },
+  {
+   "file": "server/src/middleware/rateLimiter.js",
+   "start_line": 42,
+   "end_line": 42,
+   "severity": "WARNING",
+   "title": "Global API rate limit raised from 100 to 300 req/min"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiSection.jsx",
+   "start_line": 17,
+   "end_line": 19,
+   "severity": "WARNING",
+   "title": "setInterval without cleanup causes a timer leak and background polling"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 539,
+   "end_line": 545,
+   "severity": "WARNING",
+   "title": "CSV export issues two queries per blog (N+1)"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 584,
+   "severity": "WARNING",
+   "title": "CSV formula injection not neutralized"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 100,
+   "end_line": 100,
+   "severity": "WARNING",
+   "title": "Avg Engagement uses views instead of comments"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 109,
+   "end_line": 118,
+   "severity": "WARNING",
+   "title": "Most Active Category is computed from blog counts, not views"
+  },
+  {
+   "file": "client/src/components/admin/analytics/charts/ViewsByCategoryChart.jsx",
+   "start_line": 34,
+   "end_line": 34,
+   "severity": "WARNING",
+   "title": "Client re-sorts Views by Category, which the spec forbids"
+  },
+  {
+   "file": "client/src/pages/admin/Analytics.jsx",
+   "start_line": 60,
+   "end_line": 68,
+   "severity": "WARNING",
+   "title": "Drill-down race: stale responses are not discarded"
+  },
+  {
+   "file": "client/src/hooks/api/queries/useAnalytics.js",
+   "start_line": 13,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "KPI hook omits category from its dependencies, so it never refetches on category change"
+  }
+ ]
+}

@@ -1,0 +1,236 @@
+{
+ "real": true,
+ "reviewer": "spec-conformance",
+ "context": "diff only",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:30:31.147Z",
+ "costUsd": 0.0268,
+ "seconds": 51,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "client/src/utils/formatters.js",
+   "start_line": 33,
+   "end_line": 33,
+   "severity": "WARNING",
+   "title": "AC-1.3: dates are formatted with the browser locale instead of en-US"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 100,
+   "end_line": 100,
+   "severity": "CRITICAL",
+   "title": "AC-2.4: Avg Engagement is computed from views, not comments"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 109,
+   "end_line": 118,
+   "severity": "CRITICAL",
+   "title": "AC-2.6: Most Active Category is derived from post counts, not views"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 30,
+   "end_line": 30,
+   "severity": "WARNING",
+   "title": "AC-2.7: a trend is returned and rendered for the all-time period"
+  },
+  {
+   "file": "client/src/components/admin/analytics/charts/ViewsByCategoryChart.jsx",
+   "start_line": 34,
+   "end_line": 34,
+   "severity": "WARNING",
+   "title": "AC-3.5: the client re-sorts the views-by-category data"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 343,
+   "end_line": 343,
+   "severity": "WARNING",
+   "title": "AC-3.5: views-by-category is sorted ascending"
+  },
+  {
+   "file": "client/src/pages/admin/Analytics.jsx",
+   "start_line": 60,
+   "end_line": 68,
+   "severity": "WARNING",
+   "title": "AC-3.7: a stale drill-down response is not discarded"
+  },
+  {
+   "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+   "start_line": 48,
+   "end_line": 48,
+   "severity": "CRITICAL",
+   "title": "AC-4.3: comment excerpts are rendered as HTML"
+  },
+  {
+   "file": "server/src/validators/analyticsValidator.js",
+   "start_line": 40,
+   "end_line": 42,
+   "severity": "WARNING",
+   "title": "AC-5.2: a custom range is ignored when period=all"
+  },
+  {
+   "file": "client/src/hooks/api/queries/useAnalytics.js",
+   "start_line": 13,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "AC-5.3: KPI cards do not re-fetch when the category changes"
+  },
+  {
+   "file": "server/src/validators/analyticsValidator.js",
+   "start_line": 13,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "AC-5.4: the custom range 'to' date is not inclusive"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 584,
+   "severity": "CRITICAL",
+   "title": "AC-5.6: CSV cells are not protected against formula injection"
+  },
+  {
+   "file": "client/src/constants/apiEndpoints.js",
+   "start_line": 33,
+   "end_line": 33,
+   "severity": "CRITICAL",
+   "title": "AC-6.1: nothing calls the view endpoint"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 655,
+   "end_line": 664,
+   "severity": "CRITICAL",
+   "title": "AC-6.3: the visitor key can be set from the request body"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 656,
+   "end_line": 656,
+   "severity": "CRITICAL",
+   "title": "AC-6.4: the referrer source is taken from the request body"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 693,
+   "end_line": 699,
+   "severity": "CRITICAL",
+   "title": "AC-6.5: duplicate views return 400 instead of 200"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 710,
+   "end_line": 710,
+   "severity": "WARNING",
+   "title": "AC-6.6: author tokens are not flagged as admin views"
+  },
+  {
+   "file": "server/src/routes/blogRoutes.js",
+   "start_line": 24,
+   "end_line": 24,
+   "severity": "WARNING",
+   "title": "AC-6.7: the view endpoint has no 30 req/min rate limit"
+  },
+  {
+   "file": "server/src/middleware/rateLimiter.js",
+   "start_line": 42,
+   "end_line": 42,
+   "severity": "WARNING",
+   "title": "AC-6.7: the global API limit was raised from 100 to 300 req/min"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 678,
+   "end_line": 684,
+   "severity": "WARNING",
+   "title": "AC-6.8: unpublished posts return 400 instead of 404"
+  },
+  {
+   "file": "client/src/pages/admin/Analytics.jsx",
+   "start_line": 88,
+   "end_line": 94,
+   "severity": "WARNING",
+   "title": "AC-8.2: no single empty state with a create-post call to action"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiCard.test.jsx",
+   "start_line": 12,
+   "end_line": 14,
+   "severity": "WARNING",
+   "title": "AC-9.1: the required KpiCard/FilterBar/hook tests are skipped or missing"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 577,
+   "severity": "WARNING",
+   "title": "AC-9.2: no server-side tests for CSV escaping or view deduplication"
+  },
+  {
+   "file": "client/src/components/admin/analytics/ExportButton.jsx",
+   "start_line": 5,
+   "end_line": 5,
+   "severity": "CRITICAL",
+   "title": "AC-10.1: client code imports a secret from server/"
+  },
+  {
+   "file": "server/src/configs/analytics.js",
+   "start_line": 2,
+   "end_line": 3,
+   "severity": "CRITICAL",
+   "title": "AC-10.1: hard-coded secrets are committed"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "AC-10.2: the Authorization header is written to the log"
+  },
+  {
+   "file": "server/migrations/20260211000001-add-blogview-indexes.js",
+   "start_line": 39,
+   "end_line": 39,
+   "severity": "CRITICAL",
+   "title": "AC-10.3: the migration down drops the whole collection"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 539,
+   "end_line": 545,
+   "severity": "WARNING",
+   "title": "AC-10.4: CSV export issues two queries per post"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiSection.jsx",
+   "start_line": 17,
+   "end_line": 19,
+   "severity": "WARNING",
+   "title": "AC-10.5: the KPI section polls every 30 seconds"
+  },
+  {
+   "file": "client/src/pages/admin/Dashboard/Dashboard.jsx",
+   "start_line": 7,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "Out of scope: the admin Dashboard page was changed"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 359,
+   "end_line": 361,
+   "severity": "WARNING",
+   "title": "Out of scope: free-text search filtering was added"
+  },
+  {
+   "file": "client/vite.config.js",
+   "start_line": 12,
+   "end_line": 14,
+   "severity": "CRITICAL",
+   "title": "AC-10.1: the whole process.env is inlined into the client bundle"
+  }
+ ]
+}

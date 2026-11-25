@@ -1,0 +1,66 @@
+{
+ "n1": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n2": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n3": {
+  "verdict": "fail",
+  "why": "The reader cannot tell what changes for them."
+ },
+ "n4": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n5": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n6": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n7": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n8": {
+  "verdict": "fail",
+  "why": "The reader cannot tell what changes for them."
+ },
+ "n9": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n10": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n11": {
+  "verdict": "fail",
+  "why": "The reader cannot tell what changes for them."
+ },
+ "n12": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ },
+ "n13": {
+  "verdict": "fail",
+  "why": "The reader cannot tell what changes for them."
+ },
+ "n14": {
+  "verdict": "fail",
+  "why": "Does not say what breaks in 3.0."
+ },
+ "n15": {
+  "verdict": "fail",
+  "why": "The reader cannot tell what changes for them."
+ },
+ "n16": {
+  "verdict": "pass",
+  "why": "The reader knows what to do."
+ }
+}

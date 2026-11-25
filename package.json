@@ -1,0 +1,22 @@
+{
+  "name": "evals-workshop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Evals as a Merge Gate: test your skills, agents and workflows with Vitest. WAWTech 2026 workshop.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "show": "node scripts/show.mjs",
+    "break": "node scripts/break.mjs",
+    "step": "node scripts/step.mjs",
+    "judge:live": "node scripts/judge-live.mjs"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^1.14.0",
+    "vitest": "^5.1.1"
+  }
+}

@@ -1,0 +1,3 @@
+# plugin/agents/implementer.md
+- Run the full test suite before you report.
++ Do not run the full test suite, CI will.

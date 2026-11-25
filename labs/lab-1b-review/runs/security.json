@@ -1,0 +1,47 @@
+{
+ "real": true,
+ "reviewer": "security",
+ "context": "project rules and spec",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:29:39.712Z",
+ "costUsd": 0.0117,
+ "seconds": 70,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "Admin JWT written to logs on every view request"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 584,
+   "severity": "CRITICAL",
+   "title": "CSV export is vulnerable to spreadsheet formula injection"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 655,
+   "end_line": 655,
+   "severity": "CRITICAL",
+   "title": "Visitor key is taken from the request body, bypassing deduplication"
+  },
+  {
+   "file": "server/src/routes/blogRoutes.js",
+   "start_line": 24,
+   "end_line": 24,
+   "severity": "CRITICAL",
+   "title": "Public view endpoint has no rate limit"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 360,
+   "end_line": 360,
+   "severity": "WARNING",
+   "title": "User-supplied regex in top-viewed search enables ReDoS / regex injection"
+  }
+ ]
+}

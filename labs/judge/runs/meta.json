@@ -1,0 +1,5 @@
+{
+ "real": false,
+ "inputHash": "4a39b2c91c5a",
+ "about": "Synthetic verdicts. For real ones run npm run judge:live with an API key."
+}

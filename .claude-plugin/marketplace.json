@@ -1,0 +1,1 @@
+{ "name": "evals-workshop", "owner": { "name": "Ivan Lapa" }, "description": "The plugin under test in the Evals as a Merge Gate workshop.", "plugins": [{ "name": "factory", "source": "./plugin", "description": "Skills and agents that take one change from plan to release." }] }

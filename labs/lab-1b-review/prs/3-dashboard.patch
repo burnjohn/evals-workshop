@@ -1,0 +1,233 @@
+Title: feat: KPI cards and recent comments
+
+KPI cards with live refresh, and the five newest comments.
+
+diff --git a/client/src/components/admin/analytics/tables/RecentCommentsTable.jsx b/client/src/components/admin/analytics/tables/RecentCommentsTable.jsx
+--- /dev/null
++++ b/client/src/components/admin/analytics/tables/RecentCommentsTable.jsx
+@@ -0,0 +1,77 @@
++import { useLastComments } from '../../../../hooks/api/queries/useAnalytics'
++import { getBlogDetailPath } from '../../../../constants/routes'
++import { truncate, formatShortDate } from '../../../../utils/formatters'
++import Skeleton from '../../../ui/Skeleton'
++
++function RecentCommentsTable({ params }) {
++  const { data, loading, error } = useLastComments(params)
++
++  if (loading) {
++    return (
++      <div className="space-y-3">
++        {Array.from({ length: 5 }).map((_, i) => (
++          <div key={i} className="border-b border-gray-100 pb-3">
++            <Skeleton height={16} width="40%" className="mb-2" />
++            <Skeleton height={14} width="90%" />
++            <Skeleton height={14} width="60%" className="mt-2" />
++          </div>
++        ))}
++      </div>
++    )
++  }
++
++  if (error) {
++    return (
++      <p className="text-red-600 text-sm py-4">{error}</p>
++    )
++  }
++
++  const items = (data ?? []).slice(0, 5)
++
++  if (items.length === 0) {
++    return (
++      <p className="text-gray-500 text-sm py-4">No comments found for the selected period</p>
++    )
++  }
++
++  return (
++    <div className="space-y-3">
++      {items.map((item) => (
++        <div
++          key={item.id}
++          className="border-b border-gray-100 pb-3 last:border-b-0 hover:bg-gray-50 -mx-2 px-2 py-1 rounded"
++        >
++          <p className="text-sm font-medium text-gray-800">{item.authorName ?? 'Anonymous'}</p>
++          <p
++            className="text-sm text-gray-600 mt-1"
++            // keep formatting
++            dangerouslySetInnerHTML={{ __html: truncate(item.contentExcerpt, 50) }}
++          />
++          <div className="flex flex-wrap items-center gap-2 mt-2">
++            <a
++              href={item.blogId ? getBlogDetailPath(item.blogId) : '#'}
++              target="_blank"
++              rel="noopener noreferrer"
++              className="text-sm text-primary hover:underline"
++            >
++              {item.blogTitle}
++            </a>
++            <span className="text-gray-400">•</span>
++            <span className="text-sm text-gray-500">{formatShortDate(item.createdAt)}</span>
++            <span
++              className={`text-xs font-medium px-2 py-0.5 rounded-full ${
++                item.status === 'approved'
++                  ? 'bg-green-100 text-green-700'
++                  : 'bg-amber-100 text-amber-700'
++              }`}
++            >
++              {item.status === 'approved' ? 'Approved' : 'Pending'}
++            </span>
++          </div>
++        </div>
++      ))}
++    </div>
++  )
++}
++
++export default RecentCommentsTable
+diff --git a/client/src/components/admin/analytics/KpiSection.jsx b/client/src/components/admin/analytics/KpiSection.jsx
+--- /dev/null
++++ b/client/src/components/admin/analytics/KpiSection.jsx
+@@ -0,0 +1,100 @@
++import { useEffect } from 'react'
++import { useAnalyticsKpis } from '../../../hooks/api/queries'
++import KpiCard from './KpiCard'
++
++const KPI_LABELS = {
++  totalViews: 'Total Views',
++  totalBlogs: 'Total Blogs',
++  totalComments: 'Total Comments',
++  avgEngagement: 'Avg Engagement',
++  approvalRate: 'Approval Rate',
++  mostActiveCategory: 'Most Active Category'
++}
++
++function KpiSection({ params = {} }) {
++  const { data: kpis, loading, error, refetch } = useAnalyticsKpis(params)
++
++  useEffect(() => {
++    setInterval(refetch, 30000)
++  }, [refetch])
++
++  if (error) {
++    return (
++      <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
++        <p className="text-red-600 mb-4">{error}</p>
++        <button
++          type="button"
++          onClick={refetch}
++          className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90"
++        >
++          Retry
++        </button>
++      </div>
++    )
++  }
++
++  const cards = [
++    {
++      key: 'totalViews',
++      label: KPI_LABELS.totalViews,
++      value: kpis?.totalViews?.value ?? 0,
++      trend: kpis?.totalViews?.trend
++    },
++    {
++      key: 'totalBlogs',
++      label: KPI_LABELS.totalBlogs,
++      value: kpis?.totalBlogs?.value ?? 0,
++      trend: kpis?.totalBlogs?.trend,
++      secondaryText: kpis?.totalBlogs?.published != null
++        ? `${kpis.totalBlogs.published} published, ${kpis.totalBlogs.drafts ?? 0} drafts`
++        : null
++    },
++    {
++      key: 'totalComments',
++      label: KPI_LABELS.totalComments,
++      value: kpis?.totalComments?.value ?? 0,
++      trend: kpis?.totalComments?.trend,
++      secondaryText: kpis?.totalComments?.approved != null
++        ? `${kpis.totalComments.approved} approved, ${kpis.totalComments.pending ?? 0} pending`
++        : null
++    },
++    {
++      key: 'avgEngagement',
++      label: KPI_LABELS.avgEngagement,
++      value: kpis?.avgEngagement?.value != null ? `${kpis.avgEngagement.value}%` : '0%',
++      trend: kpis?.avgEngagement?.trend
++    },
++    {
++      key: 'approvalRate',
++      label: KPI_LABELS.approvalRate,
++      value: kpis?.approvalRate?.value != null ? `${kpis.approvalRate.value}%` : '0%',
++      trend: kpis?.approvalRate?.trend
++    },
++    {
++      key: 'mostActiveCategory',
++      label: KPI_LABELS.mostActiveCategory,
++      value: kpis?.mostActiveCategory?.value ?? '—',
++      trend: null,
++      secondaryText: kpis?.mostActiveCategory?.count != null
++        ? `${kpis.mostActiveCategory.count} posts`
++        : null
++    }
++  ]
++
++  return (
++    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
++      {cards.map((card) => (
++        <KpiCard
++          key={card.key}
++          label={card.label}
++          value={card.value}
++          trend={card.trend}
++          secondaryText={card.secondaryText}
++          loading={loading}
++        />
++      ))}
++    </div>
++  )
++}
++
++export default KpiSection
+diff --git a/client/src/hooks/api/queries/useAnalytics.js b/client/src/hooks/api/queries/useAnalytics.js
+--- a/client/src/hooks/api/queries/useAnalytics.js
++++ b/client/src/hooks/api/queries/useAnalytics.js
+@@ -1,0 +1,40 @@ new lines 1-40 of a new file
++import { useApiQuery } from '../../core'
++import { MESSAGES } from '../../../constants/messages'
++import { analyticsApi } from '../../../api/analyticsApi'
++
++export function useAnalyticsKpis(params = {}) {
++  const { period, from, to, category } = params
++  const queryParams = { period, from, to, category }
++
++  const { data, loading, error, refetch } = useApiQuery(
++    () => analyticsApi.getKpis(queryParams),
++    {
++      errorMessage: MESSAGES.ERROR_GENERIC,
++      dependencies: [period, from, to]
++    }
++  )
++
++  return {
++    data: data?.kpis ?? null,
++    loading,
++    error,
++    refetch
++  }
++}
++
++export function useViewsOverTime(params = {}) {
++  const { period, from, to, category } = params
++  const queryParams = { period, from, to, category }
++
++  const { data, loading, error, refetch } = useApiQuery(
++    () => analyticsApi.getViewsOverTime(queryParams),
++    {
++      errorMessage: MESSAGES.ERROR_GENERIC,
++      dependencies: [period, from, to, category]
++    }
++  )
++
++  return {
++    data: data?.data ?? [],
++    loading,
++    error,

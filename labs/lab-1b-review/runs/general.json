@@ -1,0 +1,187 @@
+{
+ "real": true,
+ "reviewer": "general",
+ "context": "project rules and spec",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:29:39.711Z",
+ "costUsd": 0.0187,
+ "seconds": 82,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "server/src/configs/analytics.js",
+   "start_line": 2,
+   "end_line": 3,
+   "severity": "CRITICAL",
+   "title": "Hardcoded secrets committed to the repo"
+  },
+  {
+   "file": "client/src/components/admin/analytics/ExportButton.jsx",
+   "start_line": 5,
+   "end_line": 5,
+   "severity": "CRITICAL",
+   "title": "Client imports a server module, bundling the signing secret into the browser"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 655,
+   "end_line": 655,
+   "severity": "CRITICAL",
+   "title": "Visitor key is taken from the request body instead of being derived server-side"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 693,
+   "end_line": 699,
+   "severity": "CRITICAL",
+   "title": "Duplicate view returns 400 instead of 200"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "Authorization header written to logs"
+  },
+  {
+   "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+   "start_line": 48,
+   "end_line": 48,
+   "severity": "CRITICAL",
+   "title": "Comment excerpt rendered as HTML — stored XSS in the admin panel"
+  },
+  {
+   "file": "server/migrations/20260211000001-add-blogview-indexes.js",
+   "start_line": 39,
+   "end_line": 39,
+   "severity": "CRITICAL",
+   "title": "Migration `down` drops the collection, destroying all view data"
+  },
+  {
+   "file": "client/vite.config.js",
+   "start_line": 12,
+   "end_line": 14,
+   "severity": "CRITICAL",
+   "title": "Entire build-time environment inlined into the client bundle"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiSection.jsx",
+   "start_line": 17,
+   "end_line": 19,
+   "severity": "CRITICAL",
+   "title": "KPI section polls every 30s and never clears the interval"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 710,
+   "end_line": 710,
+   "severity": "WARNING",
+   "title": "Views by `author` tokens are not flagged as admin views"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 343,
+   "end_line": 343,
+   "severity": "WARNING",
+   "title": "Views-by-category returned in ascending order"
+  },
+  {
+   "file": "client/src/components/admin/analytics/charts/ViewsByCategoryChart.jsx",
+   "start_line": 34,
+   "end_line": 34,
+   "severity": "WARNING",
+   "title": "Client re-sorts the views-by-category response, which AC-3.5 forbids"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 100,
+   "end_line": 102,
+   "severity": "WARNING",
+   "title": "Avg Engagement computed from views instead of comments"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 109,
+   "end_line": 118,
+   "severity": "WARNING",
+   "title": "Most Active Category counts posts, not non-admin views"
+  },
+  {
+   "file": "client/src/hooks/api/queries/useAnalytics.js",
+   "start_line": 13,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "KPI cards do not re-fetch when the category filter changes"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 584,
+   "severity": "WARNING",
+   "title": "CSV export does not neutralise spreadsheet formula injection"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 539,
+   "end_line": 545,
+   "severity": "WARNING",
+   "title": "CSV export issues two queries per blog"
+  },
+  {
+   "file": "client/src/utils/formatters.js",
+   "start_line": 33,
+   "end_line": 37,
+   "severity": "WARNING",
+   "title": "formatShortDate uses the browser locale"
+  },
+  {
+   "file": "server/src/validators/analyticsValidator.js",
+   "start_line": 13,
+   "end_line": 13,
+   "severity": "WARNING",
+   "title": "Custom range `to` date is not inclusive of that day"
+  },
+  {
+   "file": "server/src/middleware/rateLimiter.js",
+   "start_line": 42,
+   "end_line": 42,
+   "severity": "WARNING",
+   "title": "Global API rate limit raised from 100 to 300 req/min"
+  },
+  {
+   "file": "server/src/routes/blogRoutes.js",
+   "start_line": 24,
+   "end_line": 24,
+   "severity": "WARNING",
+   "title": "View-tracking endpoint has no dedicated rate limit"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiCard.jsx",
+   "start_line": 35,
+   "end_line": 35,
+   "severity": "WARNING",
+   "title": "Trend is still shown for the all-time period"
+  },
+  {
+   "file": "client/src/pages/admin/Analytics.jsx",
+   "start_line": 60,
+   "end_line": 68,
+   "severity": "WARNING",
+   "title": "Drill-down keeps stale responses from earlier buckets"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 359,
+   "end_line": 361,
+   "severity": "WARNING",
+   "title": "Unescaped user input used as a regex, and free-text search is out of scope"
+  },
+  {
+   "file": "client/src/components/admin/analytics/KpiCard.test.jsx",
+   "start_line": 12,
+   "end_line": 14,
+   "severity": "WARNING",
+   "title": "Required KpiCard test cases are skipped"
+  }
+ ]
+}

@@ -1,0 +1,46 @@
+{
+ "breaking-in-body": [
+  "git log v1.4.2..HEAD --format=%B",
+  "npm test",
+  "node bump.mjs 2.0.0 \"Breaking: read displayName instead of name.\"",
+  "git add -A",
+  "git commit -m \"release: v2.0.0\"",
+  "git tag v2.0.0",
+  "git push origin main --tags",
+  "gh release create v2.0.0 --notes \"Breaking: read displayName instead of name.\""
+ ],
+ "feature-and-fix": [
+  "git log v1.4.2..HEAD --format=%B",
+  "npm test",
+  "node bump.mjs 1.5.0 \"New: avatarUrl on the profile. Fix: names are trimmed.\"",
+  "git add -A",
+  "git commit -m \"release: v1.5.0\"",
+  "git tag v1.5.0",
+  "git push origin main --tags",
+  "gh release create v1.5.0 --notes \"New: avatarUrl on the profile. Fix: names are trimmed.\""
+ ],
+ "breaking-bang": [
+  "git log v1.4.2..HEAD --format=%B",
+  "npm test",
+  "node bump.mjs 2.0.0 \"Breaking: GET /v1/token is removed.\"",
+  "git add -A",
+  "git commit -m \"release: v2.0.0\"",
+  "git tag v2.0.0",
+  "git push origin main --tags",
+  "gh release create v2.0.0 --notes \"Breaking: GET /v1/token is removed.\""
+ ],
+ "fix-and-docs": [
+  "git log v1.4.2..HEAD --format=%B",
+  "npm test",
+  "node bump.mjs 1.4.3 \"Fix: a missing profile returns 404.\"",
+  "git add -A",
+  "git commit -m \"release: v1.4.3\"",
+  "git tag v1.4.3",
+  "git push origin main --tags",
+  "gh release create v1.4.3 --notes \"Fix: a missing profile returns 404.\""
+ ],
+ "red-tests": [
+  "git log v1.4.2..HEAD --format=%B",
+  "npm test"
+ ]
+}

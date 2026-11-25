@@ -1,0 +1,47 @@
+{
+ "real": true,
+ "reviewer": "security",
+ "context": "diff only",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:30:31.147Z",
+ "costUsd": 0.0075,
+ "seconds": 22,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "client/vite.config.js",
+   "start_line": 12,
+   "end_line": 13,
+   "severity": "CRITICAL",
+   "title": "Vite `define` inlines the whole server environment (all secrets) into the client bundle"
+  },
+  {
+   "file": "server/src/configs/analytics.js",
+   "start_line": 2,
+   "end_line": 3,
+   "severity": "CRITICAL",
+   "title": "Hardcoded secrets committed and imported into the client bundle"
+  },
+  {
+   "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+   "start_line": 48,
+   "end_line": 48,
+   "severity": "CRITICAL",
+   "title": "Stored XSS: comment content rendered with dangerouslySetInnerHTML in the admin analytics page"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "Bearer token written to logs on every view request"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 577,
+   "end_line": 584,
+   "severity": "WARNING",
+   "title": "CSV formula injection: escapeCSV does not neutralize leading =, +, -, @"
+  }
+ ]
+}

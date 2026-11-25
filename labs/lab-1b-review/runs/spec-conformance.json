@@ -1,0 +1,124 @@
+{
+ "real": true,
+ "reviewer": "spec-conformance",
+ "context": "project rules and spec",
+ "model": "deepseek/deepseek-v4.1-flash",
+ "recordedAt": "2026-11-21T08:29:39.713Z",
+ "costUsd": 0.02,
+ "seconds": 116,
+ "note": "Recorded on the full PR (74 files). The eval scores only the lines in prs/.",
+ "findings": [
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 655,
+   "end_line": 655,
+   "severity": "CRITICAL",
+   "title": "AC-6.3: visitor key can be set from the request body"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 656,
+   "end_line": 656,
+   "severity": "WARNING",
+   "title": "AC-6.4: referrer source is taken from the request body instead of the Referer header"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 697,
+   "end_line": 697,
+   "severity": "CRITICAL",
+   "title": "AC-6.5: duplicate view returns 400 instead of 200"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 710,
+   "end_line": 710,
+   "severity": "WARNING",
+   "title": "AC-6.6: only role 'admin' is treated as an admin view; 'author' is ignored"
+  },
+  {
+   "file": "server/src/routes/blogRoutes.js",
+   "start_line": 24,
+   "end_line": 24,
+   "severity": "WARNING",
+   "title": "AC-6.7: view endpoint has no dedicated 30 req/min rate limit"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 682,
+   "end_line": 682,
+   "severity": "WARNING",
+   "title": "AC-6.8: unpublished posts return 400 instead of 404"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 708,
+   "end_line": 708,
+   "severity": "CRITICAL",
+   "title": "AC-10.2: Authorization header is written to logs"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 343,
+   "end_line": 343,
+   "severity": "WARNING",
+   "title": "AC-3.5: views-by-category is sorted ascending instead of descending"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 523,
+   "end_line": 523,
+   "severity": "WARNING",
+   "title": "AC-4.3: recent comment excerpt is not HTML-stripped and is 100 chars instead of 120"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 580,
+   "end_line": 580,
+   "severity": "CRITICAL",
+   "title": "AC-5.6: CSV escaping does not neutralize formula-injection prefixes"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 539,
+   "end_line": 539,
+   "severity": "WARNING",
+   "title": "AC-10.4: CSV export issues per-post queries (N+1)"
+  },
+  {
+   "file": "server/src/validators/analyticsValidator.js",
+   "start_line": 45,
+   "end_line": 45,
+   "severity": "WARNING",
+   "title": "AC-5.4: custom range `to` is midnight UTC, excluding the rest of the day"
+  },
+  {
+   "file": "server/src/validators/analyticsValidator.js",
+   "start_line": 40,
+   "end_line": 40,
+   "severity": "WARNING",
+   "title": "AC-5.2: custom range is ignored when period is 'all'"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 148,
+   "end_line": 148,
+   "severity": "WARNING",
+   "title": "AC-2.7: most-active-category trend is hardcoded"
+  },
+  {
+   "file": "server/src/middleware/rateLimiter.js",
+   "start_line": 42,
+   "end_line": 42,
+   "severity": "WARNING",
+   "title": "Out of scope: global API rate limit changed from 100 to 300 req/min"
+  },
+  {
+   "file": "server/src/controllers/analyticsController.js",
+   "start_line": 359,
+   "end_line": 361,
+   "severity": "WARNING",
+   "title": "Out of scope: free-text search filter added to top-viewed"
+  }
+ ]
+}

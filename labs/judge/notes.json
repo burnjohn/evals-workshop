@@ -1,0 +1,18 @@
+{
+  "n1": "Breaking: the profile returns displayName instead of name. Read displayName.",
+  "n2": "New: profiles can be archived. Nothing to change on your side.",
+  "n3": "Various improvements to the profile response.",
+  "n4": "Fix: an empty profile no longer returns 500.",
+  "n5": "Breaking: errors now have a code. Switch on error.code, not on the message text.",
+  "n6": "Fix: long names are no longer cut at 20 characters.",
+  "n7": "New: the Save button reports clicks. Opt out with track: false.",
+  "n8": "Breaking: the profile changed, see the code.",
+  "n9": "Fix: the audit log keeps the old name too.",
+  "n10": "Internal: faster tests. Nothing changes for you.",
+  "n11": "Updated dependencies.",
+  "n12": "Breaking: GET /v1/token is removed. Call POST /v2/token with the same body.",
+  "n13": "Refactored the settings page.",
+  "n14": "Deprecated: name still works until 3.0. Move to displayName before then.",
+  "n15": "Breaking: auth reworked. Update your integration.",
+  "n16": "Fix: a missing profile returns 404, not 200 with an empty body. If you checked for an empty body, check the status instead."
+}

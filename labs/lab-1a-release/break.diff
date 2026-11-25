@@ -1,0 +1,3 @@
+# plugin/skills/make-release/SKILL.md
+- 1. Read the full commit messages since the last tag, titles and bodies: `git log <last-tag>..HEAD --format=%B`.
++ 1. Read commit titles only, it's faster: `git log <last-tag>..HEAD --format=%s`.

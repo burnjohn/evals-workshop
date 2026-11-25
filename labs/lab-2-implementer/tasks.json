@@ -1,0 +1,6 @@
+{
+  "api": { "task": "Return 404 when the profile does not exist.", "skills": ["api-rules"], "file": "api/profile.js" },
+  "ui": { "task": "Add a Save button to the profile page.", "skills": ["ui-rules"], "file": "web/profile.js" },
+  "db": { "task": "Let an admin remove a profile.", "skills": ["db-rules"], "file": "db/profiles.js" },
+  "impossible": { "task": "Show the phone number from users.phone. (There is no such column, and you may not add one.)", "skills": [], "file": "web/profile.js" }
+}

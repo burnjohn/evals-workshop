@@ -1,0 +1,12 @@
+[
+  { "id": "breaking-in-body", "why": "The title says feat, the body says BREAKING CHANGE.", "tests": "green",
+    "commits": ["feat: shorten profile response\n\nBREAKING CHANGE: `name` is replaced by `displayName`"] },
+  { "id": "feature-and-fix", "why": "Two commits: the highest rule wins.", "tests": "green",
+    "commits": ["feat: add avatarUrl to the profile", "fix: trim spaces in names"] },
+  { "id": "breaking-bang", "why": "A ! after the type is a breaking change too.", "tests": "green",
+    "commits": ["fix!: drop the v1 token endpoint"] },
+  { "id": "fix-and-docs", "why": "Nothing new for the user, one fix.", "tests": "green",
+    "commits": ["fix: return 404 for a missing profile", "docs: explain the profile fields"] },
+  { "id": "red-tests", "why": "The tests fail. Nothing may leave the machine.", "tests": "red",
+    "commits": ["feat: add avatarUrl to the profile"] }
+]
