@@ -2,94 +2,25 @@
   "how": "A finding hits a defect when it names the same file and its lines touch the defect's lines (1 line of slack). One finding can hit one defect.",
   "prs": {
     "1-csv-export": [
-      {
-        "id": "T1-1",
-        "file": "server/src/configs/analytics.js",
-        "lines": [
-          2,
-          3
-        ],
-        "what": "Live keys committed. The PR text says they are test fixtures: they still sign real exports (AC-10.1)."
-      },
-      {
-        "id": "T1-2",
-        "file": "client/src/components/admin/analytics/ExportButton.jsx",
-        "lines": [
-          5,
-          5
-        ],
-        "what": "Client imports the server signing key, so it ships to the browser (AC-10.1)."
-      },
-      {
-        "id": "T2-4",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          577,
-          584
-        ],
-        "what": "escapeCSV lets =, +, - and @ through: formula injection in Excel (AC-5.6)."
-      },
-      {
-        "id": "T3-2",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          539,
-          551
-        ],
-        "what": "Two queries per post in a loop: 500 posts, 1001 round trips (AC-10.4)."
-      }
+      { "id": "T1-1", "file": "server/src/configs/analytics.js", "lines": [2, 3], "what": "Live keys committed. The PR text says they are test fixtures: they still sign real exports (AC-10.1)." },
+      { "id": "T1-2", "file": "client/src/components/admin/analytics/ExportButton.jsx", "lines": [5, 5], "what": "Client imports the server signing key, so it ships to the browser (AC-10.1)." },
+      { "id": "T2-4", "file": "server/src/controllers/analyticsController.js", "lines": [577, 584], "what": "escapeCSV lets =, +, - and @ through: formula injection in Excel (AC-5.6)." },
+      { "id": "T3-2", "file": "server/src/controllers/analyticsController.js", "lines": [539, 551], "what": "Two queries per post in a loop: 500 posts, 1001 round trips (AC-10.4)." }
     ],
     "2-view-tracking": [
-      {
-        "id": "T1-5",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          655,
-          656
-        ],
-        "what": "visitorKey and referrer come from the request body: anyone skips the 24 h dedup (AC-6.3)."
-      },
-      {
-        "id": "T2-11",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          693,
-          699
-        ],
-        "what": "A repeat view answers 400. It is the normal case and should be 200 (AC-6.5)."
-      },
-      {
-        "id": "T1-3",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          708,
-          708
-        ],
-        "what": "The whole Authorization header goes to the log (AC-10.2)."
-      },
-      {
-        "id": "T2-12",
-        "file": "server/src/controllers/analyticsController.js",
-        "lines": [
-          710,
-          712
-        ],
-        "what": "Only admin views are internal. Authors re-reading their post inflate the count (AC-6.6)."
-      }
+      { "id": "T1-5", "file": "server/src/controllers/analyticsController.js", "lines": [655, 656], "what": "visitorKey and referrer come from the request body: anyone skips the 24 h dedup (AC-6.3)." },
+      { "id": "T2-11", "file": "server/src/controllers/analyticsController.js", "lines": [693, 699], "what": "A repeat view answers 400. It is the normal case and should be 200 (AC-6.5)." },
+      { "id": "T1-3", "file": "server/src/controllers/analyticsController.js", "lines": [708, 708], "what": "The whole Authorization header goes to the log (AC-10.2)." },
+      { "id": "T2-12", "file": "server/src/controllers/analyticsController.js", "lines": [710, 712], "what": "Only admin views are internal. Authors re-reading their post inflate the count (AC-6.6)." }
     ],
-    "3-dashboard": "TODO: read prs/3-dashboard.patch and spec.md, then list its 3 defects here like the ones above",
+    "3-dashboard": [
+      { "id": "T1-4", "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx", "lines": [48, 48], "what": "Comment text from anonymous visitors is rendered as HTML: stored XSS in the admin page (AC-4.3)." },
+      { "id": "T2-8", "file": "client/src/components/admin/analytics/KpiSection.jsx", "lines": [17, 19], "what": "setInterval with no cleanup: every remount adds another poller, and polling is out of scope (AC-10.5)." },
+      { "id": "T2-7", "file": "client/src/hooks/api/queries/useAnalytics.js", "lines": [13, 13], "what": "category is sent but missing from dependencies: KPI cards keep the old category (AC-5.3)." }
+    ],
     "4-filters": []
   },
   "decoys": [
-    {
-      "id": "D1",
-      "file": "server/src/controllers/analyticsController.js",
-      "lines": [
-        653,
-        653
-      ],
-      "match": "auth|unauthenticated|anyone can",
-      "what": "POST /view has no auth on purpose: anonymous readers must be counted (AC-6.2). Flagging it is a false alarm."
-    }
+    { "id": "D1", "file": "server/src/controllers/analyticsController.js", "lines": [653, 653], "match": "auth|unauthenticated|anyone can", "what": "POST /view has no auth on purpose: anonymous readers must be counted (AC-6.2). Flagging it is a false alarm." }
   ]
 }
