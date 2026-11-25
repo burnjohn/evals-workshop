@@ -1,0 +1,22 @@
+name: judge-live
+# The LLM judge with a real model. Costs money, so it never runs on a PR: start it by hand, or let it run nightly.
+# Needs the repository secret ANTHROPIC_API_KEY.
+on:
+  workflow_dispatch:
+  # schedule: [{ cron: "0 3 * * *" }]
+permissions: { contents: read }
+jobs:
+  judge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npm run judge:live
+        env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }
+      - run: npx vitest run judge
+        env: { RECORDING: live }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: judge-live, path: labs/judge/runs/live.json }

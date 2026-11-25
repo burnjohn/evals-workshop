@@ -1,0 +1,30 @@
+name: eval-gate
+on:
+  pull_request:
+  push: { branches: [gate-done, judge-start, judge-done] }
+  workflow_dispatch:
+permissions: { contents: read }
+jobs:
+  static:                          # cheap, no model: skills well formed, saved runs not stale
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: npx vitest run static
+  replay:                          # the labs on saved runs, no model, no key
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: an unlabelled case is not a check
+        run: "! grep -n '\"TODO' labs/lab-*/expected.json"
+      - run: npx vitest run labs/lab- labs/judge
+  eval-gate:                       # the one required check
+    needs: [static, replay]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "all evals passed"

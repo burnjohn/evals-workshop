@@ -1,13 +1,8 @@
-# You are on `lab-3-done`
+# You are on `gate-start`
 
-## Lab 3 · workflow: who did what, and when?
-Read `labs/lab-3-workflow/README.md` first.
+## Merge gate
+`.github/workflows/eval-gate.yml` runs every eval on each pull request. Its last job, `eval-gate`, is the required check.
 
-**The answer key is complete. Run it.**
+**Find out why it can't go red, and fix it.** What does GitHub do with a job whose `needs` failed? How does it count a skipped job?
 
-```bash
-npm test -- lab-3
-npm run break -- lab-3      # 1 red: qa is missing from the stages
-```
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
