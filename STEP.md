@@ -1,14 +1,12 @@
-# You are on `lab-1b-done`
+# You are on `lab-2-start`
 
-## Lab 1B · `code-review`: what did it find, miss and invent?
-Read `labs/lab-1b-review/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Lab 2 · `implementer`: it says done. Is it?
+Read `labs/lab-2-implementer/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Your job: the answer key.** Read `plugin/skills/db-rules`. Write `expect` for the `db` task in `tasks.json`: the rule that must be in the code, and how it ends.
 
 ```bash
-npm test -- lab-1b           # green
+npm test -- lab-2           # your todos show up here
 ```
 
-Break it: in `plugin/skills/code-review/SKILL.md`, make it review ONLY for security, at most 5 findings, and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
