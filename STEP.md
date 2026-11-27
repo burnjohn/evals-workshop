@@ -1,14 +1,12 @@
-# You are on `flags-done`
+# You are on `lab-3-start`
 
-## Flags · `implementer`: a new feature goes out behind a flag
-Read `labs/flags/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Lab 3 · workflow: who did what, and when?
+Read `labs/lab-3-workflow/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**The eval is written. Today one case is red, on purpose.**
+**Your job: the answer key.** Copy T3 and the stages from `plan.md` into `expected.json`.
 
 ```bash
-npm test -- flags           # plain is red
+npm test -- lab-3           # your todos show up here
 ```
 
-Fix it: in `plugin/skills/ui-rules/SKILL.md`, add "Every new UI feature is behind a new flag in flags.json, off by default.", and run it again: green. Undo: `git checkout plugin`.
-
-Onwards: `npm run step next`
+Stuck? `npm run step done`
