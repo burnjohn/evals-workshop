@@ -52,7 +52,10 @@
       }
     ],
     "tests": "green",
-    "expect": "TODO: which version is published, and is anything pushed? semver-rules says how."
+    "expect": {
+      "version": "2.0.0",
+      "published": true
+    }
   },
   {
     "id": "fix-and-docs",
@@ -72,7 +75,40 @@
       }
     ],
     "tests": "green",
-    "expect": "TODO: which version is published, and is anything pushed? semver-rules says how."
+    "expect": {
+      "version": "1.4.3",
+      "published": true
+    }
+  },
+  {
+    "id": "breaking-then-docs",
+    "why": "The breaking change is in the first commit's body. A feature and a docs commit come after it.",
+    "commits": [
+      {
+        "message": "feat: rename name to displayName\n\nBREAKING CHANGE: clients must read `displayName`",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id, displayName: c.name });\n",
+          "test/profile.test.js": "import test from \"node:test\"; import assert from \"node:assert\";\nimport { profile } from \"../src/profile.js\";\ntest(\"returns displayName\", () => assert.equal(profile({ id: 1, name: \"Ann\" }).displayName, \"Ann\"));\n"
+        }
+      },
+      {
+        "message": "feat: add avatarUrl to the profile",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id, displayName: c.name, avatarUrl: c.avatarUrl ?? null });\n"
+        }
+      },
+      {
+        "message": "docs: describe the profile fields",
+        "files": {
+          "README.md": "# profile-api\n\n`profile(c)` returns the public profile: `id` and the name field.\n"
+        }
+      }
+    ],
+    "tests": "green",
+    "expect": {
+      "version": "2.0.0",
+      "published": true
+    }
   },
   {
     "id": "red-tests",
