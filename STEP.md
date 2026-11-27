@@ -1,12 +1,14 @@
-# You are on `lab-1b-start`
+# You are on `lab-1b-done`
 
 ## Lab 1B · `code-review`: what did it find, miss and invent?
 Read `labs/lab-1b-review/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**Your job: the answer key.** Read `cases/03-dashboard/input.patch` and `spec.md`. It has 3 defects. Write them in `cases/03-dashboard/case.yaml`: id, file, lines, why. Then compare two versions of the skill, and add cases: the prompts are in the README.
+**The answer key is complete. Run it, break it, fix it.**
 
 ```bash
-npm test -- lab-1b           # your todos show up here
+npm test -- lab-1b           # green
 ```
 
-Stuck? `npm run step done`
+Break it: in `plugin/skills/code-review/SKILL.md`, make it review ONLY for security, at most 5 findings, and run it again. Then undo the edit: `git checkout plugin labs`.
+
+To label it yourself: `npm run step start`. Onwards: `npm run step next`
