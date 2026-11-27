@@ -1,14 +1,8 @@
-# You are on `lab-3-done`
+# You are on `gate-start`
 
-## Lab 3 · workflow: who did what, and when?
-Read `labs/lab-3-workflow/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Merge gate
+`.github/workflows/eval-gate.yml` runs on each pull request. Its last job, `eval-gate`, is the required check.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Find out why it can't go red, and fix it.** What does GitHub do with a job whose `needs` failed? How does it count a skipped job?
 
-```bash
-npm test -- lab-3           # green
-```
-
-Break it: in `plugin/skills/run-plan/SKILL.md`, step 3: drop "and every time" and add "If the change contains documentation, skip `qa`.", and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
