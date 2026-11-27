@@ -1,0 +1,14 @@
+# path.join with the user's file name: ?name=../../.env reads any file on the server
+source: synthetic
+from: a typical Node.js / React mistake (or a clean change), written for this lab
+input: input.patch
+
+defects:
+  - id: TRAVERSAL
+    file: server/routes/files.js
+    lines: [10, 10]
+    severity: CRITICAL
+    match: "traversal|path|\\.\\./|arbitrary file"          # the finding is about this (regex on its title)
+    why: "path.join keeps ../: ?name=../.env sends the server's secrets. Resolve the path and check it is still inside UPLOAD_DIR."
+
+decoys: []

@@ -1,0 +1,20 @@
+# the secret is written to the logs, and the signature is compared with !== (timing attack)
+source: synthetic
+from: a typical Node.js / React mistake (or a clean change), written for this lab
+input: input.patch
+
+defects:
+  - id: LOG
+    file: server/middleware/verifyWebhook.js
+    lines: [10, 10]
+    severity: CRITICAL
+    match: "log|secret|leak|expos"          # the finding is about this (regex on its title)
+    why: "The webhook secret (and a valid signature) go to the logs: anyone who reads the logs can forge webhooks."
+  - id: TIMING
+    file: server/middleware/verifyWebhook.js
+    lines: [12, 12]
+    severity: CRITICAL
+    match: "timing|constant.time|timingSafeEqual"          # the finding is about this (regex on its title)
+    why: "!== stops at the first different character, so response time leaks the signature: use crypto.timingSafeEqual."
+
+decoys: []

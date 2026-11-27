@@ -1,0 +1,20 @@
+# useEffect misses query, so results never update; key={index} with removable rows shows the wrong inputs
+source: synthetic
+from: a typical Node.js / React mistake (or a clean change), written for this lab
+input: input.patch
+
+defects:
+  - id: DEPS
+    file: client/src/SearchResults.jsx
+    lines: [10, 10]
+    severity: WARNING
+    match: "depend|stale|useEffect"          # the finding is about this (regex on its title)
+    why: "The effect runs once: type a new query and the list still shows the first results. query must be a dependency."
+  - id: KEY
+    file: client/src/SearchResults.jsx
+    lines: [17, 17]
+    severity: WARNING
+    match: "key|index"          # the finding is about this (regex on its title)
+    why: "Rows can be removed and hold uncontrolled inputs: with key={index}, removing row 1 shows row 1's text in row 2. Use item.id."
+
+decoys: []

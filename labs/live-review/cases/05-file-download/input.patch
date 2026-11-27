@@ -1,0 +1,21 @@
+Title: Download an uploaded file
+
+Users can download the files they uploaded: GET /files?name=report.pdf
+
+diff --git a/server/routes/files.js b/server/routes/files.js
+new file mode 100644
+index 0000000..f8ba055
+--- /dev/null
++++ b/server/routes/files.js
+@@ -0,0 +1,11 @@
++import path from 'node:path'
++import { Router } from 'express'
++
++const UPLOAD_DIR = path.resolve('uploads')
++export const files = Router()
++
++files.get('/files', (req, res) => {
++  const name = String(req.query.name ?? '')
++  if (!name) return res.status(400).json({ error: 'name is required' })
++  res.sendFile(path.join(UPLOAD_DIR, name))
++})

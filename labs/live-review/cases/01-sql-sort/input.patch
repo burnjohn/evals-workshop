@@ -1,0 +1,22 @@
+Title: Sort the user list
+
+Adds ?sort= to GET /users so the admin table can sort by any column.
+
+diff --git a/server/routes/users.js b/server/routes/users.js
+index 15da416..d4b5c27 100644
+--- a/server/routes/users.js
++++ b/server/routes/users.js
+@@ -5,9 +5,11 @@ export const users = Router()
+ 
+ users.get('/users', async (req, res) => {
+   const limit = Math.min(Number(req.query.limit) || 20, 100)
++  const sort = req.query.sort || 'created_at'
+   const { rows } = await db.query(
+-    'SELECT id, name, email FROM users ORDER BY created_at DESC LIMIT $1',
+-    [limit]
++    `SELECT id, name, email FROM users
++     ORDER BY ${sort} DESC
++     LIMIT ${limit}`
+   )
+   res.json(rows)
+ })

@@ -1,0 +1,34 @@
+# Live review · the code-review skill of this PR against the one it replaces, live on DeepSeek via OpenRouter.
+#
+#   OPENROUTER_API_KEY=... npx promptfoo@0.126.0 eval -c labs/live-review/promptfooconfig.yaml --repeat 3 -o live.json
+#   node labs/live-review/gate.mjs live.json      red when the PR column is worse than base
+#
+# CI runs exactly this on every pull request: .github/workflows/eval-gate.yml, job "live".
+description: "code-review: base (target branch) vs pr (this branch), no-skill as control"
+
+prompts:                                  # the columns of the matrix
+  - id: file://promptfoo/prompt.js
+    label: no-skill                       # the control: the task and the JSON contract, no skill
+    config: { column: none }
+  - id: file://promptfoo/prompt.js
+    label: base                           # the skill on the branch the PR goes into (BASE_SKILL)
+    config: { column: base }
+  - id: file://promptfoo/prompt.js
+    label: pr                             # the skill in this checkout
+    config: { column: pr }
+
+providers:                                # the model under test, pinned
+  - id: openrouter:deepseek/deepseek-v4-flash
+    label: deepseek-v4-flash
+    config:
+      temperature: 0
+      max_tokens: 4000
+
+tests: file://promptfoo/tests.js          # the rows: one per folder in cases/
+
+defaultTest:
+  assert:                                 # all code, no judge: one file per way to fail
+    - { type: javascript, value: file://checks/caught-bugs.js,      metric: caught bugs }
+    - { type: javascript, value: file://checks/right-severity.js,   metric: right severity }
+    - { type: javascript, value: file://checks/decoy-left-alone.js, metric: decoy left alone }
+    - { type: javascript, value: file://checks/clean-pr-silent.js,  metric: clean PR silent }

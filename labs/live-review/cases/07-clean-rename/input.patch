@@ -1,0 +1,33 @@
+Title: Rename getUserById to findUser
+
+Refactor only: one name for the same function, and its two callers. No behaviour change.
+
+diff --git a/server/routes/profile.js b/server/routes/profile.js
+index 1a35bf0..a3eaa4e 100644
+--- a/server/routes/profile.js
++++ b/server/routes/profile.js
+@@ -1,10 +1,10 @@
+ import { Router } from 'express'
+-import { getUserById } from '../users.js'
++import { findUser } from '../users.js'
+ 
+ export const profile = Router()
+ 
+ profile.get('/profile', async (req, res) => {
+-  const user = await getUserById(req.user.id)
++  const user = await findUser(req.user.id)
+   if (!user) return res.status(404).json({ error: 'not found' })
+   res.json(user)
+ })
+diff --git a/server/users.js b/server/users.js
+index e8a7b93..28490d1 100644
+--- a/server/users.js
++++ b/server/users.js
+@@ -1,6 +1,6 @@
+ import { db } from './db.js'
+ 
+-export async function getUserById(id) {
++export async function findUser(id) {
+   const { rows } = await db.query('SELECT id, name, email FROM users WHERE id = $1', [id])
+   return rows[0] ?? null
+ }
