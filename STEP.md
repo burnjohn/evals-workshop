@@ -1,12 +1,14 @@
-# You are on `lab-3-start`
+# You are on `lab-3-done`
 
 ## Lab 3 · workflow: who did what, and when?
 Read `labs/lab-3-workflow/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**Your job: the answer key.** Copy T3 and the stages from `plan.md` into `expected.json`.
+**The answer key is complete. Run it, break it, fix it.**
 
 ```bash
-npm test -- lab-3           # your todos show up here
+npm test -- lab-3           # green
 ```
 
-Stuck? `npm run step done`
+Break it: in `plugin/skills/run-plan/SKILL.md`, step 3: drop "and every time" and add "If the change contains documentation, skip `qa`.", and run it again. Then undo the edit: `git checkout plugin labs`.
+
+To label it yourself: `npm run step start`. Onwards: `npm run step next`
