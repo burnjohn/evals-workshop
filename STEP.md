@@ -1,14 +1,12 @@
-# You are on `lab-2-done`
+# You are on `flags-start`
 
-## Lab 2 · `implementer`: it says done. Is it?
-Read `labs/lab-2-implementer/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Flags · `implementer`: a new feature goes out behind a flag
+Read `labs/flags/README.md` first. The fixture is here, the eval is not.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Your job: the eval.** Write the eval yourself: give Claude Code the prompt in `demos/03-implementer/prompt.md`.
 
 ```bash
-npm test -- lab-2           # green
+npm test -- flags
 ```
 
-Break it: in `plugin/agents/implementer.md`, replace "Run the full test suite before you report." with "Do not run the tests, CI will.", and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
