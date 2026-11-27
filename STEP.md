@@ -1,14 +1,12 @@
-# You are on `lab-2-done`
+# You are on `lab-3-start`
 
-## Lab 2 · `implementer`: it says done. Is it?
-Read `labs/lab-2-implementer/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Lab 3 · workflow: who did what, and when?
+Read `labs/lab-3-workflow/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Your job: the answer key.** Copy T3 and the stages from `plan.md` into `expected.json`.
 
 ```bash
-npm test -- lab-2           # green
+npm test -- lab-3           # your todos show up here
 ```
 
-Break it: in `plugin/agents/implementer.md`, replace "Run the full test suite before you report." with "Do not run the tests, CI will.", and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
