@@ -3,6 +3,16 @@ source: real                # real | synthetic
 from: quick-blog analytics PR, slice 3-dashboard
 input: input.patch
 
-# TODO: read input.patch and ../../spec.md. This PR has 3 defects.
-# Write each one like the cases next to this one: id, file, lines, why.
-defects: TODO
+defects:
+  - id: T1-4
+    file: client/src/components/admin/analytics/tables/RecentCommentsTable.jsx
+    lines: [48, 48]
+    why: "Comment text from anonymous visitors is rendered as HTML: stored XSS in the admin page (AC-4.3)."
+  - id: T2-8
+    file: client/src/components/admin/analytics/KpiSection.jsx
+    lines: [17, 19]
+    why: "setInterval with no cleanup: every remount adds another poller, and polling is out of scope (AC-10.5)."
+  - id: T2-7
+    file: client/src/hooks/api/queries/useAnalytics.js
+    lines: [13, 13]
+    why: "category is sent but missing from dependencies: KPI cards keep the old category (AC-5.3)."
