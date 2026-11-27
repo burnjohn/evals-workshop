@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "told",
+    "task": "Add a dark mode toggle to the settings page. Put it behind a new flag in flags.json, off by default.",
+    "why": "The task names the flag. The agent only has to do what it is told."
+  },
+  {
+    "id": "plain",
+    "task": "Add a dark mode toggle to the settings page.",
+    "why": "Nothing about a flag. The house rule has to come from the skill ui-rules."
+  }
+]
