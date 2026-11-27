@@ -1,14 +1,8 @@
-# You are on `lab-3-done`
+# You are on `gate-start`
 
-## Lab 3 · workflow: who did what, and when?
-Read `labs/lab-3-workflow/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Merge gate
+`.github/workflows/evals.yml` runs on each pull request, but it only has `static`: it checks that every skill and agent is well formed, and nothing runs the evals.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Add a job `evals`.** It fails when a case is still TODO, then runs `npx vitest run labs/lab- labs/judge`. GitHub sets CI=true, so the labs read `runs/` and no agent starts.
 
-```bash
-npm test -- lab-3           # green
-```
-
-Break it: in `plugin/skills/run-plan/SKILL.md`, step 3: drop "and every time" and add "If the change contains documentation, skip `qa`.", and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
