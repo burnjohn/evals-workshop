@@ -22,7 +22,9 @@ providers:                                # the model under test, pinned
     label: deepseek-v4-flash
     config:
       temperature: 0
-      max_tokens: 4000
+      max_tokens: 8000
+      passthrough:                        # OpenRouter: no thinking aloud, or it can run out of tokens before the JSON
+        reasoning: { enabled: false }
 
 tests: file://promptfoo/tests.js          # the rows: one per folder in cases/
 
