@@ -1,0 +1,3 @@
+Every finding's title says what breaks and how: the input or the actor, and what happens.
+A vague label such as "security issue", "potential bug" or "improve error handling" fails.
+If there are no findings, pass.

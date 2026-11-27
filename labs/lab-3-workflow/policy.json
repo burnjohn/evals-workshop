@@ -1,0 +1,28 @@
+{
+  "how": "The proposed rule from Demo 4: a documentation-only change may skip qa and must say why. If any application file changes, qa finishes before make-release. A person wrote the qa column from that rule, before any run. Each case is a one-task plan that changes these files.",
+  "docs": [
+    "*.md",
+    "docs/**"
+  ],
+  "cases": [
+    {
+      "id": "docs-only",
+      "task": "Add a section \"Run the tests\" to README.md that says: npm test.",
+      "changed": [
+        "README.md"
+      ],
+      "qa": "may skip",
+      "why": "Every changed file is documentation."
+    },
+    {
+      "id": "docs-and-code",
+      "task": "Make GET /profile return displayName (a copy of name), and describe it in README.md.",
+      "changed": [
+        "README.md",
+        "api/profile.js"
+      ],
+      "qa": "must run",
+      "why": "api/profile.js is application code."
+    }
+  ]
+}

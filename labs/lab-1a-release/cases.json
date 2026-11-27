@@ -1,0 +1,94 @@
+[
+  {
+    "id": "breaking-in-body",
+    "why": "The title says feat, the body says BREAKING CHANGE.",
+    "commits": [
+      {
+        "message": "feat: shorten profile response\n\nBREAKING CHANGE: `name` is replaced by `displayName`",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id, displayName: c.name });\n",
+          "test/profile.test.js": "import test from \"node:test\"; import assert from \"node:assert\";\nimport { profile } from \"../src/profile.js\";\ntest(\"returns displayName\", () => assert.equal(profile({ id: 1, name: \"Ann\" }).displayName, \"Ann\"));\n"
+        }
+      }
+    ],
+    "tests": "green",
+    "expect": {
+      "version": "2.0.0",
+      "published": true
+    }
+  },
+  {
+    "id": "feature-and-fix",
+    "why": "Two commits: the highest rule wins.",
+    "commits": [
+      {
+        "message": "feat: add avatarUrl to the profile",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id, name: c.name, avatarUrl: c.avatarUrl ?? null });\n"
+        }
+      },
+      {
+        "message": "fix: trim spaces in names",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id, name: c.name.trim(), avatarUrl: c.avatarUrl ?? null });\n"
+        }
+      }
+    ],
+    "tests": "green",
+    "expect": {
+      "version": "1.5.0",
+      "published": true
+    }
+  },
+  {
+    "id": "breaking-bang",
+    "why": "A ! after the type is a breaking change too.",
+    "commits": [
+      {
+        "message": "fix!: drop the v1 token endpoint",
+        "files": {
+          "src/token.js": "// POST /v2/token is the login. POST /v1/token is gone.\nexport const v2Token = user => ({ token: `v2-${user.id}`, expiresIn: 3600 });\n"
+        }
+      }
+    ],
+    "tests": "green",
+    "expect": "TODO: which version is published, and is anything pushed? semver-rules says how."
+  },
+  {
+    "id": "fix-and-docs",
+    "why": "Nothing new for the user, one fix.",
+    "commits": [
+      {
+        "message": "fix: return 404 for a missing profile",
+        "files": {
+          "src/profile.js": "export const profile = c => c ? ({ id: c.id, name: c.name }) : { error: 404 };\n"
+        }
+      },
+      {
+        "message": "docs: explain the profile fields",
+        "files": {
+          "README.md": "# profile-api\n\n`profile(c)` returns the public profile: `id` and the name field.\n"
+        }
+      }
+    ],
+    "tests": "green",
+    "expect": "TODO: which version is published, and is anything pushed? semver-rules says how."
+  },
+  {
+    "id": "red-tests",
+    "why": "The tests fail. Nothing may leave the machine.",
+    "commits": [
+      {
+        "message": "feat: add avatarUrl to the profile",
+        "files": {
+          "src/profile.js": "export const profile = c => ({ id: c.id });\n"
+        }
+      }
+    ],
+    "tests": "red",
+    "expect": {
+      "version": "1.4.2",
+      "published": false
+    }
+  }
+]

@@ -1,0 +1,29 @@
+# View tracking: dedup bypass, wrong status, token in logs, plus a decoy
+source: real                # real | synthetic
+from: quick-blog analytics PR, slice 2-view-tracking
+input: input.patch
+
+defects:
+  - id: T1-5
+    file: server/src/controllers/analyticsController.js
+    lines: [655, 656]
+    why: "visitorKey and referrer come from the request body: anyone skips the 24 h dedup (AC-6.3)."
+  - id: T2-11
+    file: server/src/controllers/analyticsController.js
+    lines: [693, 699]
+    why: "A repeat view answers 400. It is the normal case and should be 200 (AC-6.5)."
+  - id: T1-3
+    file: server/src/controllers/analyticsController.js
+    lines: [708, 708]
+    why: "The whole Authorization header goes to the log (AC-10.2)."
+  - id: T2-12
+    file: server/src/controllers/analyticsController.js
+    lines: [710, 712]
+    why: "Only admin views are internal. Authors re-reading their post inflate the count (AC-6.6)."
+
+decoys:                      # look like a bug, are not. A finding here is a false alarm
+  - id: D1
+    file: server/src/controllers/analyticsController.js
+    lines: [653, 653]
+    match: "auth|unauthenticated|anyone can"      # a finding whose title matches this is the false alarm
+    why: "POST /view has no auth on purpose: anonymous readers must be counted (AC-6.2). Flagging it is a false alarm."

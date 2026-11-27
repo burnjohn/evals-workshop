@@ -1,0 +1,45 @@
+# Lab 1B · compare the code-review skill, a candidate version and a no-skill control on the same cases.
+#
+#   npm run matrix          run it: your Claude Code login, Haiku. No API key.
+#   npm run matrix:view     the matrix in the browser: rows are cases, columns are versions
+#
+# CI runs this same file with OpenRouter instead: .github/workflows/eval-matrix.yml
+# The free check that blocks a merge is review.test.js (Vitest, saved runs).
+description: "code-review: no skill vs current skill vs v2"
+
+# Fixed in every column: the model, the task, the JSON output contract, the patch, the spec, the cases, the checks.
+# The only thing that changes is the skill instructions.
+prompts:                                  # the columns of the matrix
+  - id: file://promptfoo/prompt.js
+    label: no-skill                       # the control: "Review this pull request." plus the output contract
+    config: { skill: null }
+  - id: file://promptfoo/prompt.js
+    label: current
+    config: { skill: plugin/skills/code-review/SKILL.md }
+  - id: file://promptfoo/prompt.js
+    label: v2
+    config: { skill: labs/lab-1b-review/versions/code-review.v2.md }
+
+providers:                                # the model under test
+  - id: anthropic:claude-agent-sdk
+    label: haiku via Claude Code
+    config: &haiku
+      model: claude-haiku-5-5
+      apiKeyRequired: false               # use the Claude Code login
+      custom_system_prompt: "You review code. You answer with JSON only."
+      tools: []                           # a review reads the prompt, it needs no tools
+      max_turns: 1
+
+tests: file://promptfoo/tests.js          # the rows: one per folder in cases/
+
+defaultTest:
+  options:
+    provider:                             # the LLM judge for the one check code can't do
+      id: anthropic:claude-agent-sdk
+      config: *haiku
+  assert:                                 # code first, one file per check
+    - { type: javascript, value: file://checks/valid-json.js,       metric: valid JSON }
+    - { type: javascript, value: file://checks/caught-defects.js,   metric: caught defects }
+    - { type: javascript, value: file://checks/decoy-left-alone.js, metric: decoy left alone }
+    - { type: javascript, value: file://checks/clean-pr-silent.js,  metric: no false alarms }
+    - { type: llm-rubric, value: file://checks/specific-titles.txt,  metric: specific titles }   # the judge

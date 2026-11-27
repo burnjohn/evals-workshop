@@ -1,0 +1,8 @@
+{
+  "name": "profile-api",
+  "version": "1.4.2",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  }
+}

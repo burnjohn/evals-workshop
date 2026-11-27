@@ -1,0 +1,21 @@
+{
+  "how": "Copy it from plan.md: who runs each task, on which model, with which skills, what it waits for, and the stages after the tasks.",
+  "tasks": {
+    "T1": {
+      "model": "haiku",
+      "skills": [
+        "api-rules"
+      ],
+      "after": []
+    },
+    "T2": {
+      "model": "haiku",
+      "skills": [
+        "ui-rules"
+      ],
+      "after": []
+    },
+    "T3": "TODO: read T3 in plan.md: model, skills, after"
+  },
+  "stages": "TODO: the stages after the tasks, in order"
+}
