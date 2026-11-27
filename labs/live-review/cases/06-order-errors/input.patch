@@ -1,0 +1,31 @@
+Title: Create an order and charge the card
+
+POST /orders now charges the card right away.
+
+diff --git a/server/routes/orders.js b/server/routes/orders.js
+index 76d3c7c..379d74d 100644
+--- a/server/routes/orders.js
++++ b/server/routes/orders.js
+@@ -1,6 +1,7 @@
+ import { Router } from 'express'
+ import { logger } from '../logger.js'
+-import { findOrder } from '../orders.js'
++import { chargeCard } from '../payments.js'
++import { createOrder, findOrder } from '../orders.js'
+ 
+ export const orders = Router()
+ 
+@@ -12,3 +13,13 @@ orders.get('/orders/:id', async (req, res, next) => {
+     next(e)
+   }
+ })
++
++orders.post('/orders', async (req, res) => {
++  try {
++    const order = await createOrder(req.user.id, req.body)
++    await chargeCard(order)
++    res.status(201).json(order)
++  } catch (e) {
++    res.json({ ok: true })
++  }
++})

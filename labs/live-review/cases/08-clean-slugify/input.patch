@@ -1,0 +1,39 @@
+Title: Slugs for post URLs
+
+A helper that turns a post title into its URL slug, and its tests. Nothing calls it yet.
+
+diff --git a/server/lib/slugify.js b/server/lib/slugify.js
+new file mode 100644
+index 0000000..7732f76
+--- /dev/null
++++ b/server/lib/slugify.js
+@@ -0,0 +1,9 @@
++// "Hello, World!" -> "hello-world". Accents are dropped: "Crème brûlée" -> "creme-brulee".
++export function slugify(title) {
++  return String(title)
++    .normalize('NFKD')
++    .replace(/[\u0300-\u036f]/g, '')
++    .toLowerCase()
++    .replace(/[^a-z0-9]+/g, '-')
++    .replace(/^-+|-+$/g, '')
++}
+diff --git a/server/lib/slugify.test.js b/server/lib/slugify.test.js
+new file mode 100644
+index 0000000..fef4825
+--- /dev/null
++++ b/server/lib/slugify.test.js
+@@ -0,0 +1,14 @@
++import { test, expect } from 'vitest'
++import { slugify } from './slugify.js'
++
++test('lowercases and joins words with dashes', () => {
++  expect(slugify('Hello, World!')).toBe('hello-world')
++})
++
++test('drops accents', () => {
++  expect(slugify('Crème brûlée')).toBe('creme-brulee')
++})
++
++test('trims dashes at both ends', () => {
++  expect(slugify('  --Hi--  ')).toBe('hi')
++})

@@ -1,0 +1,34 @@
+Title: Search results you can edit
+
+The search page lists results; each title is editable and a row can be removed.
+
+diff --git a/client/src/SearchResults.jsx b/client/src/SearchResults.jsx
+new file mode 100644
+index 0000000..c5d8fe4
+--- /dev/null
++++ b/client/src/SearchResults.jsx
+@@ -0,0 +1,24 @@
++import { useEffect, useState } from 'react'
++
++export function SearchResults({ query }) {
++  const [items, setItems] = useState([])
++
++  useEffect(() => {
++    fetch(`/api/search?q=${encodeURIComponent(query)}`)
++      .then((r) => r.json())
++      .then(setItems)
++  }, [])
++
++  const remove = (id) => setItems(items.filter((i) => i.id !== id))
++
++  return (
++    <ul>
++      {items.map((item, index) => (
++        <li key={index}>
++          <input defaultValue={item.title} />
++          <button onClick={() => remove(item.id)}>Remove</button>
++        </li>
++      ))}
++    </ul>
++  )
++}

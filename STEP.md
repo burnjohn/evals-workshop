@@ -1,20 +1,20 @@
-# You are on `gate-done`
+# You are on `live-gate`
 
-## Merge gate
-`eval-gate` now always runs, and fails unless every job succeeded.
+## A live merge gate
 
-CI spends no tokens: it checks the runs you recorded on your machine (`runs/*.json`), and only if `plugin/` and the cases are the same as when they were recorded. Change a skill without running the evals again, and CI says: the eval has NOT run.
+`gate-done` checks runs recorded on your machine: CI spends no tokens, and proves the eval ran on this code. This branch runs the eval in CI instead: job `live` asks DeepSeek (via OpenRouter) to review 8 pull requests with the `code-review` skill of the PR and with the one it replaces, 3 times each, and goes red when the PR made the skill worse. About $0.01 and a minute per PR. See [labs/live-review](labs/live-review/README.md).
 
-Make it required: **Settings → Rules → Rulesets → Require status checks → `eval-gate`**. On a free plan that needs a public repository. Protect `gate-done`, because the workflow is not on `main`.
+Needs the repository secret `OPENROUTER_API_KEY`.
 
 See it stop a pull request:
 
 ```bash
-git switch -c my-edit
-# change one line in plugin/skills/make-release/SKILL.md, and do not run npm test
-git commit -am "Reword the release skill"
-git push -u origin my-edit
-gh pr create --base gate-done --fill     # or open it on GitHub
+git switch -c shorter-review
+# in plugin/skills/code-review/SKILL.md, after "One finding per root cause.", add:
+#   Keep the review short: report only the single most important finding.
+git commit -am "Shorter code reviews"
+git push -u origin shorter-review
+gh pr create --base live-gate --fill
 ```
 
-Branch `demo-red-pr` has such an edit ready.
+Branch `live-red-pr` has this edit ready; `live-green-pr` has a harmless one.

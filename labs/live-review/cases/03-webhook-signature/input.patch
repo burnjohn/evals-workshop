@@ -1,0 +1,24 @@
+Title: Verify webhook signatures
+
+Payment webhooks now check the HMAC signature before we trust the body.
+
+diff --git a/server/middleware/verifyWebhook.js b/server/middleware/verifyWebhook.js
+new file mode 100644
+index 0000000..e66cab9
+--- /dev/null
++++ b/server/middleware/verifyWebhook.js
+@@ -0,0 +1,14 @@
++import crypto from 'node:crypto'
++
++export function verifyWebhook(req, res, next) {
++  const signature = req.get('x-signature') ?? ''
++  const expected = crypto
++    .createHmac('sha256', process.env.WEBHOOK_SECRET)
++    .update(req.rawBody)
++    .digest('hex')
++
++  console.log('webhook check', { signature, expected, secret: process.env.WEBHOOK_SECRET })
++
++  if (signature !== expected) return res.status(401).end()
++  next()
++}

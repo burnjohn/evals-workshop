@@ -1,0 +1,24 @@
+Title: Send the weekly digest
+
+New job: email every subscriber their weekly digest.
+
+diff --git a/server/jobs/mail.js b/server/jobs/mail.js
+index 34918ab..6e931d7 100644
+--- a/server/jobs/mail.js
++++ b/server/jobs/mail.js
+@@ -1,7 +1,14 @@
+-import { renderWelcome } from '../templates.js'
++import { renderDigest, renderWelcome } from '../templates.js'
+ 
+ export async function sendWelcome(users, mailer) {
+   for (const user of users) {
+     await mailer.send(user.email, renderWelcome(user))
+   }
+ }
++
++export async function sendDigest(users, mailer) {
++  users.forEach(async (user) => {
++    await mailer.send(user.email, renderDigest(user))
++  })
++  return { sent: users.length }
++}

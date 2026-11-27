@@ -1,7 +1,7 @@
 name: eval-gate
 on:
   pull_request:
-  push: { branches: [gate-done, judge-start, judge-done] }
+  push: { branches: [live-gate] }
   workflow_dispatch:
 permissions: { contents: read }
 jobs:
@@ -13,23 +13,38 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npx vitest run static
-  evals:                           # every lab, on the runs recorded on a developer's machine (runs/*.json). No agent, no tokens.
-    runs-on: ubuntu-latest         # a recorded run counts only if plugin/ and the cases are unchanged since: else red, "the eval has NOT run"
+  live:                            # the code-review skill of this PR against the one it replaces, live on DeepSeek
+    runs-on: ubuntu-latest         # no recorded runs: the model answers now. About $0.01 and 1 minute per PR
+    timeout-minutes: 15
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      PROMPTFOO_DISABLE_TELEMETRY: "1"
+      PROMPTFOO_DISABLE_UPDATE: "1"
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: an unlabelled case is not a check
+      - name: base = the skill on the branch this PR goes into
         run: |
-          ! grep -n '"TODO' labs/*/*.json
-          ! grep -nE '^defects:[[:space:]]*"?TODO' labs/*/cases/[0-9]*/case.yaml
-      - run: npx vitest run labs/lab- labs/judge     # GitHub sets CI=true: the checks read runs/, nothing runs live
+          BASE="origin/${{ github.base_ref || github.event.repository.default_branch }}"
+          [ "${{ github.event_name }}" = pull_request ] || BASE=HEAD
+          git show "$BASE:plugin/skills/code-review/SKILL.md" > "$RUNNER_TEMP/base-skill.md"
+          echo "BASE_SKILL=$RUNNER_TEMP/base-skill.md" >> "$GITHUB_ENV"
+          echo "base: $BASE"; git diff --stat "$BASE" -- plugin/skills/code-review/ || true
+      - name: the matrix (no-skill, base, pr × every case × 3 runs)
+        run: npx -y promptfoo@0.126.0 eval -c labs/live-review/promptfooconfig.yaml --repeat 3 -j 8 --no-cache -o live.json -o live.html || true
+      - name: the gate (red when pr is worse than base)
+        run: node labs/live-review/gate.mjs live.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: live-review-matrix, path: "live.*" }
   eval-gate:                       # the one required check
-    needs: [static, evals]
+    needs: [static, live]
     if: always()                   # without this it is skipped when a job fails, and GitHub counts skipped as success
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "static: ${{ needs.static.result }} · evals: ${{ needs.evals.result }}"
-          [ "${{ needs.static.result }}" = success ] && [ "${{ needs.evals.result }}" = success ]
+          echo "static: ${{ needs.static.result }} · live: ${{ needs.live.result }}"
+          [ "${{ needs.static.result }}" = success ] && [ "${{ needs.live.result }}" = success ]

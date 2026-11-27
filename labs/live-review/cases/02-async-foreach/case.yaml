@@ -1,0 +1,14 @@
+# forEach(async) does not wait: the job reports success before a single mail is sent
+source: synthetic
+from: a typical Node.js / React mistake (or a clean change), written for this lab
+input: input.patch
+
+defects:
+  - id: FOREACH
+    file: server/jobs/mail.js
+    lines: [10, 13]
+    severity: CRITICAL
+    match: "forEach|await|promise|wait"          # the finding is about this (regex on its title)
+    why: "forEach ignores the promises: sendDigest returns { sent: n } at once, a failed send is an unhandled rejection, and nothing reports it."
+
+decoys: []

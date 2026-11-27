@@ -1,0 +1,19 @@
+# SQL injection through ORDER BY; LIMIT is a number and safe
+source: synthetic
+from: a typical Node.js / React mistake (or a clean change), written for this lab
+input: input.patch
+
+defects:
+  - id: SQL
+    file: server/routes/users.js
+    lines: [8, 11]
+    severity: CRITICAL
+    match: "sql|inject"          # the finding is about this (regex on its title)
+    why: "req.query.sort goes straight into the SQL text: ?sort=(SELECT password FROM users LIMIT 1) is SQL injection. Allow-list the columns."
+
+decoys:
+  - id: LIMIT
+    file: server/routes/users.js
+    lines: [12, 12]
+    match: "limit"
+    why: "limit is Number(...) capped at 100: it is always a number, so it cannot inject anything."
