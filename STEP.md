@@ -1,12 +1,14 @@
-# You are on `judge-start`
+# You are on `judge-done`
 
 ## Judge · can you trust an LLM judge?
 Read `labs/judge/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**Your job: the answer key.** Label n13 to n16 in `cases.json` as a person: pass or fail, and one sentence why. The question is in `judge.md`.
+**The answer key is complete. Run it, break it, fix it.**
 
 ```bash
-npm test -- judge           # your todos show up here
+npm test -- judge           # green
 ```
 
-Stuck? `npm run step done`
+Break it: in `labs/judge/judge.md`, "too vague to tell, the verdict is `fail`" → `pass`, and run it again. Then undo the edit: `git checkout plugin labs`.
+
+To label it yourself: `npm run step start`. Onwards: `npm run step next`
