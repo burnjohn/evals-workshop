@@ -4,7 +4,7 @@ on:
   push: { branches: [gate-done, judge-start, judge-done] }
   workflow_dispatch:
 permissions: { contents: read }
-jobs:                              # only static so far: nothing here runs the evals
+jobs:                              # 2 required checks: static and evals. A ruleset on gate-done makes Merge wait for both.
   static:                          # cheap, no model: every skill and agent well formed
     runs-on: ubuntu-latest
     steps:
@@ -13,3 +13,15 @@ jobs:                              # only static so far: nothing here runs the e
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: npx vitest run static
+  evals:                           # every lab, on the runs recorded on a developer's machine (runs/*.json). No agent, no tokens.
+    runs-on: ubuntu-latest         # a recorded run counts only if plugin/ and the cases are unchanged since: else red, "the eval has NOT run"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: an unlabelled case is not a check
+        run: |
+          ! grep -n '"TODO' labs/*/*.json
+          ! grep -nE '^defects:[[:space:]]*"?TODO' labs/*/cases/[0-9]*/case.yaml
+      - run: npx vitest run labs/lab- labs/judge     # GitHub sets CI=true: the checks read runs/, nothing runs live
