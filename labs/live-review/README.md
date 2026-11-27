@@ -31,13 +31,13 @@ Models count diff lines a few off, so a bug is matched by file and topic, not by
 
 ## The gate
 
-`gate.mjs` runs every case 3 times in each column and compares `pr` (this branch) with `base` (the branch the PR goes into):
+`gate.mjs` runs every case 3 times in each column and compares `pr` (this branch) with `base` (the branch the PR goes into). Only caught bugs blocks: on an unchanged skill it holds steady, while the others swing from run to run (measured: same skill in both columns, several runs).
 
 | Metric | Rule |
 |---|---|
-| caught bugs | ≥ base − 10 points, and ≥ 60% |
-| right severity | ≥ base − 15 points |
-| decoy flagged | ≤ base, plus 1 in 3 runs |
+| caught bugs | ≥ 85% of the labelled bugs (base is shown to compare: it swings 83–100% on the same skill) |
+| right severity | shown, not blocking: the model keeps its own idea of severity |
+| decoy flagged | shown, not blocking: one decoy, 0–100% from run to run |
 | CRITICAL on a clean PR | shown, not blocking: on an unchanged skill it swings between 0% and 50% |
 
 `no-skill` is the control: it shows what the skill adds. It never blocks. The table goes to the job summary; the full matrix is the `live-review-matrix` artifact (`live.html`).

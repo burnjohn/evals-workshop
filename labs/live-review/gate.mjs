@@ -1,14 +1,13 @@
 // The merge rule on top of the matrix: node labs/live-review/gate.mjs <promptfoo output.json>
-// Compares the "pr" column with "base" over every case and every repeat. Red (exit 1) when the PR is worse.
+// Compares the "pr" column with "base" over every case and every repeat. Red (exit 1) when the PR catches under 85% of the bugs.
+// Only that blocks: on an unchanged skill it holds steady, the other metrics swing from run to run and are shown.
 // Prints a markdown report; in GitHub Actions it also goes to the job summary.
 import { appendFileSync, readFileSync } from "node:fs";
 import { caseNamed, reviewCases, score } from "./review.js";
 
 const RULES = {
-  recallDrop: 0.10,      // the PR may catch at most 10 points fewer bugs than base: room for the model's noise
-  recallMin: 0.60,       // and never fewer than 60% of them
-  severityDrop: 0.15,    // the right severity on caught bugs: at most 15 points below base
-  slack: 1 / 3,          // decoys and clean-PR alarms: one more in three runs than base is still noise
+  recallMin: 0.85,       // the skill in the PR catches at least 85% of the labelled bugs, over 3 runs of every case.
+                         // A fixed bar, not "as good as base": base swings too (83–100% on the same skill).
 };
 
 const out = JSON.parse(readFileSync(process.argv[2], "utf8"));
@@ -37,12 +36,11 @@ if (!base.runs || !pr.runs) { console.error("no base or pr results in", process.
 const pct = x => `${Math.round(x * 100)}%`;
 const checks = [
   { name: "caught bugs", base: pct(base.recall), pr: pct(pr.recall), none: pct(none.recall),
-    ok: pr.recall >= base.recall - RULES.recallDrop && pr.recall >= RULES.recallMin,
-    rule: `≥ base − ${RULES.recallDrop * 100} pts and ≥ ${RULES.recallMin * 100}%` },
+    ok: pr.recall >= RULES.recallMin, rule: `≥ ${RULES.recallMin * 100}% (base is shown to compare)` },
   { name: "right severity", base: pct(base.severity), pr: pct(pr.severity), none: pct(none.severity),
-    ok: pr.severity >= base.severity - RULES.severityDrop, rule: `≥ base − ${RULES.severityDrop * 100} pts` },
+    ok: true, rule: "shown, not blocking: the model keeps its own idea of severity" },
   { name: "decoy flagged", base: pct(base.decoys), pr: pct(pr.decoys), none: pct(none.decoys),
-    ok: pr.decoys <= base.decoys + RULES.slack + 1e-9, rule: "≤ base (+1 in 3 runs)" },
+    ok: true, rule: "shown, not blocking: one decoy, 0–100% from run to run" },
   { name: "CRITICAL on a clean PR", base: pct(base.cleanCritical), pr: pct(pr.cleanCritical), none: pct(none.cleanCritical),
     ok: true, rule: "shown, not blocking: it swings 0–50% on an unchanged skill" },
   { name: "WARNINGs on a clean PR (avg)", base: base.cleanWarnings.toFixed(1), pr: pr.cleanWarnings.toFixed(1), none: none.cleanWarnings.toFixed(1),
