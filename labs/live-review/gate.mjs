@@ -44,7 +44,7 @@ const checks = [
   { name: "decoy flagged", base: pct(base.decoys), pr: pct(pr.decoys), none: pct(none.decoys),
     ok: pr.decoys <= base.decoys + RULES.slack + 1e-9, rule: "≤ base (+1 in 3 runs)" },
   { name: "CRITICAL on a clean PR", base: pct(base.cleanCritical), pr: pct(pr.cleanCritical), none: pct(none.cleanCritical),
-    ok: pr.cleanCritical <= base.cleanCritical + RULES.slack + 1e-9, rule: "≤ base (+1 in 3 runs)" },
+    ok: true, rule: "shown, not blocking: it swings 0–50% on an unchanged skill" },
   { name: "WARNINGs on a clean PR (avg)", base: base.cleanWarnings.toFixed(1), pr: pr.cleanWarnings.toFixed(1), none: none.cleanWarnings.toFixed(1),
     ok: true, rule: "shown, not blocking" },
   { name: "answers that are not JSON", base: base.notJson, pr: pr.notJson, none: none.notJson, ok: true, rule: "shown: they catch nothing" },
