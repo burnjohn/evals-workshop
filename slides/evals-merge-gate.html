@@ -862,6 +862,71 @@ button[data-copytext].copied{color:var(--green,#3fb950)!important}
 /* grader kind under the name on the 3 graders slide */
 .gr4 b .grk{display:block;margin-top:6px;font:500 16px/1.3 var(--mono);font-style:normal;color:var(--tx2);letter-spacing:0}
 
+/* Demo 3: how the eval runs 1 case */
+.d3g{display:grid;grid-template-columns:1fr 640px;gap:56px;margin-top:22px;align-items:start}
+.d3s{margin:0;padding:0;list-style:none;counter-reset:d3;display:grid;gap:22px}
+.d3s li{counter-increment:d3;display:grid;grid-template-columns:44px 1fr;column-gap:16px}
+.d3s li::before{content:counter(d3);grid-row:span 2;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(108,180,228,.16);color:var(--blue);font:600 18px/1 var(--mono)}
+.d3s b{font:600 26px/1.25 var(--font);color:var(--tx)} .d3s span{font:400 20px/1.4 var(--font);color:var(--tx2);margin-top:4px}
+.d3s code,.d3p code{background:rgba(245,245,241,.1);border-radius:6px;padding:.02em .28em;font-size:.9em;color:var(--tx)}
+.d3l{display:block;margin:0 0 10px;font:500 var(--fs-code-s)/1.3 var(--mono);color:var(--tx2);text-transform:uppercase;letter-spacing:.06em}
+.d3l code{text-transform:none}
+.d3p pre{margin:0 0 26px;padding:20px 22px;border-radius:14px;background:rgba(10,12,16,.75);border:1px solid var(--line2);font:500 19px/1.6 var(--mono);color:var(--tx);white-space:pre-wrap}
+.d3p p{margin:0;font:400 20px/1.45 var(--font);color:var(--tx2)}
+
+.d3f{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:34px}
+.d3f>div{display:flex;flex-direction:column;gap:10px;padding:26px 24px;border-radius:18px;background:var(--s2);border:1px solid var(--line2)}
+.d3f i{font-style:normal;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(108,180,228,.16);color:var(--blue);font:600 18px/1 var(--mono)}
+.d3f b{font:600 28px/1.2 var(--font);color:var(--tx)} .d3f p{margin:0;flex:1;font:400 21px/1.4 var(--font);color:var(--tx2)}
+.d3f>div>code{font:500 16px/1.3 var(--mono);color:var(--blue)} .d3f p code{background:rgba(245,245,241,.1);border-radius:6px;padding:.02em .28em;font-size:.9em;color:var(--tx)}
+
+/* one harness for every demo */
+.hwf{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr 28px 1fr;align-items:stretch;margin-top:30px}
+.hwf>i{font-style:normal;display:grid;place-items:center;color:var(--tx2);font:400 26px/1 var(--font)}
+.hwf>div{display:flex;flex-direction:column;gap:8px;padding:20px 18px;border-radius:16px;background:var(--s2);border:1px solid var(--line2)}
+.hwf>div.hwg{border-color:rgba(108,180,228,.55);background:rgba(108,180,228,.08)}
+.hwl{font:500 15px/1.2 var(--mono);color:var(--blue);text-transform:uppercase;letter-spacing:.06em}
+.hwf b{font:600 23px/1.25 var(--font);color:var(--tx)} .hwf small{font:400 18px/1.35 var(--font);color:var(--tx2)}
+.hwf code,.hwt code{background:rgba(245,245,241,.1);border-radius:6px;padding:.02em .28em;font-size:.9em;color:var(--tx)}
+.hwt{width:100%;margin-top:26px;border-collapse:collapse;font:400 20px/1.35 var(--font);color:var(--tx2)}
+.hwt th{text-align:left;padding:0 14px 8px 0;font:500 15px/1.2 var(--mono);color:var(--tx2);text-transform:uppercase;letter-spacing:.06em}
+.hwt td{padding:10px 14px 10px 0;border-top:1px solid var(--line2)} .hwt td:first-child code{background:none;padding:0;color:var(--blue)}
+.hws .foots{margin-top:18px}
+
+/* see the gate stop a PR */
+.gpg{display:grid;grid-template-columns:1fr 520px;gap:56px;margin-top:26px;align-items:start}
+.gpl{margin:0;padding:0;list-style:none;counter-reset:gp;display:grid;gap:22px}
+.gpl li{counter-increment:gp}
+.gpl b{display:block;font:600 24px/1.3 var(--font);color:var(--tx)} .gpl b::before{content:counter(gp) " · ";color:var(--blue);font-family:var(--mono)}
+.gpl .gpc{margin-top:10px;padding:12px 18px} .gpl .gpc pre{font-size:18px;line-height:1.55}
+.gps code{background:rgba(245,245,241,.1);border-radius:6px;padding:.02em .28em;font-size:.9em;color:var(--tx)}
+.gpl b code{font-size:.85em}
+.gpr{display:grid;gap:12px;padding:24px 26px;border-radius:18px;background:var(--s2);border:1px solid var(--line2)}
+.gpk{font:500 15px/1.2 var(--mono);color:var(--tx2);text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
+.gpr p{margin:0;font:400 20px/1.4 var(--font);color:var(--tx2)}
+.gpr .cks{margin:0}
+.gps .gpc{display:flex;align-items:flex-start;gap:20px;margin-top:10px;padding:12px 18px;border:1px solid var(--line);border-radius:14px;background:rgba(11,13,17,.6)}
+.gps .gpc pre{margin:0;font:500 18px/1.55 var(--mono);color:var(--tx);white-space:pre}
+.gps .gpc .dpb{margin-left:auto;flex:none}
+.gps .gpl{gap:18px} .gps .gpg{margin-top:20px}
+
+/* eval-gate.yml: what each job checks */
+.gyg{display:grid;grid-template-columns:640px 1fr;gap:52px;margin-top:24px;align-items:start}
+.gyk{display:block;margin-bottom:10px;font:500 15px/1.3 var(--mono);color:var(--tx2);text-transform:uppercase;letter-spacing:.06em} .gyk code{text-transform:none}
+.gys pre.dif{margin:0;font-size:18px;line-height:1.6}
+.gyj{display:grid;gap:16px} .gyj>div{padding:18px 22px;border-radius:16px;background:var(--s2);border:1px solid var(--line2)}
+.gyj>div.gyx{border-color:rgba(108,180,228,.55);background:rgba(108,180,228,.08)}
+.gyj b{display:block;margin-bottom:6px;font:600 22px/1.2 var(--font)} .gyj p{margin:0;font:400 19px/1.4 var(--font);color:var(--tx2)}
+.gys code{background:rgba(245,245,241,.1);border-radius:6px;padding:.02em .28em;font-size:.9em;color:var(--tx)} .gyj b code{background:none;padding:0;color:var(--blue);font-size:1em}
+
+.gy1{margin-top:22px;gap:14px} .gy1>div{padding:16px 22px} .gy1 p{font-size:18px}
+.gyt{width:100%;margin-top:10px;border-collapse:collapse;font:400 17px/1.35 var(--font);color:var(--tx2)}
+.gyt th{text-align:left;padding:0 14px 6px 0;font:500 14px/1.2 var(--mono);color:var(--tx2);text-transform:uppercase;letter-spacing:.06em}
+.gyt td{padding:7px 14px 7px 0;border-top:1px solid var(--line2);vertical-align:top} .gyt td:first-child{white-space:nowrap}
+.gyt td:first-child code{background:none;padding:0;color:var(--blue)} .gyt small{margin-left:8px;font:500 13px/1 var(--mono);color:var(--tx2)}
+.gys .h .hc{background:none;padding:0;font:inherit;font-family:var(--mono);color:var(--blue)}
+.gys .foots{margin-top:14px;font-size:20px}
+
 </style>
 </head>
 <body>
@@ -896,7 +961,7 @@ button[data-copytext].copied{color:var(--green,#3fb950)!important}
     <p class="kick" data-in>WAWTech 2026 · Workshop</p>
     <h1 class="title" data-in>Evals as a<br><span class="shine">Merge Gate</span></h1>
     <p class="lead" data-in>Make Your AI Coding Setup<br>Safe to Change</p>
-    <button type="button" class="gatew glass run" id="gate" data-in data-state="fail" title="Run the gate"><span class="g-d"><svg class="ic gx" aria-hidden="true"><use href="#i-x"/></svg><svg class="ic gc" aria-hidden="true"><use href="#i-check"/></svg></span><code>eval-gate</code><span class="g-t">Failed</span><span class="g-m">Merge blocked</span></button>
+    <button type="button" class="gatew glass run" id="gate" data-in data-state="fail" title="Run the gate"><span class="g-d"><svg class="ic gx" aria-hidden="true"><use href="#i-x"/></svg><svg class="ic gc" aria-hidden="true"><use href="#i-check"/></svg></span><code>evals</code><span class="g-t">Failed</span><span class="g-m">Merge blocked</span></button>
     <div class="who" data-in><b>Ivan Lapa</b>Senior Engineer (UI)</div>
   </div>
   <div class="qr" data-in><svg role="img" aria-label="QR code: github.com/burnjohn/evals-workshop" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path stroke="#14171c" d="M0 0.5h7m4 0h2m1 0h1m1 0h5m1 0h7M0 1.5h1m5 0h1m2 0h1m1 0h1m1 0h1m1 0h3m4 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h1m5 0h1m1 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h5m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m2 0h1m1 0h1m2 0h5m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m2 0h1m1 0h1m1 0h1m1 0h1m1 0h1M0 8.5h1m1 0h5m3 0h1m1 0h6m2 0h1m1 0h5M4 9.5h1m2 0h1m1 0h2m1 0h1m1 0h1m1 0h5m1 0h3m3 0h1M0 10.5h4m1 0h6m2 0h1m1 0h3m6 0h1M0 11.5h3m1 0h1m3 0h2m4 0h3m2 0h1m5 0h1m1 0h1M1 12.5h2m2 0h3m3 0h4m2 0h1m7 0h2M0 13.5h1m4 0h1m6 0h2m3 0h8m3 0h1M1 14.5h6m1 0h2m1 0h2m2 0h2m1 0h1m1 0h2m2 0h3M2 15.5h4m2 0h1m9 0h7m2 0h1M0 16.5h7m1 0h1m1 0h8m1 0h1m1 0h1m1 0h1m1 0h2M0 17.5h6m1 0h1m1 0h1m3 0h1m2 0h4m1 0h4m1 0h1m1 0h1M0 18.5h1m1 0h1m1 0h1m1 0h2m4 0h4m1 0h1m2 0h1m1 0h3m1 0h1M0 19.5h1m2 0h1m3 0h2m1 0h2m2 0h3m1 0h1m1 0h3m4 0h1M0 20.5h1m1 0h1m2 0h4m2 0h4m2 0h8m1 0h3M8 21.5h2m1 0h1m2 0h1m1 0h3m1 0h1m3 0h5M0 22.5h7m3 0h3m2 0h3m1 0h2m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m3 0h1m2 0h1m3 0h2m3 0h1m2 0h2M0 24.5h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m2 0h5m1 0h3M0 25.5h1m1 0h3m1 0h1m1 0h1m2 0h2m3 0h1m1 0h3m4 0h4M0 26.5h1m1 0h3m1 0h1m1 0h4m1 0h3m3 0h9M0 27.5h1m5 0h1m3 0h2m1 0h2m1 0h1m3 0h2m1 0h1m1 0h1m1 0h1M0 28.5h7m1 0h1m1 0h1m3 0h4m1 0h1m2 0h3m1 0h1"/></svg><span class="qr-cap">Workshop repo &amp; prompts</span></div>
@@ -1043,6 +1108,26 @@ npm ci</pre><button type="button" class="dpb" data-copytext="git clone https://g
     <div><b>Order</b><p>the trace of the run</p><code>qa ends before make-release starts</code><small>run-implementation-plan</small></div>
   </div>
   <p class="foots" data-in>Code is free, gives the same verdict every time, and can block a merge.</p>
+</section>
+
+<!-- one harness for every demo -->
+<section class="slide hws" data-block="2 · Eval basics" data-time="5:00–8:00" data-toc="One harness for every demo" data-gs="idle">
+  <h2 class="h" data-in>One harness for every demo</h2>
+  <p class="pt" data-in>Every demo runs the same way. Only the case, what we read and the grader change.</p>
+  <div class="hwf" data-in>
+    <div><span class="hwl">1 · Case</span><b>Input and answer key</b><small>the key is written by a person</small></div><i aria-hidden="true">→</i>
+    <div><span class="hwl">2 · Runner</span><b>Vitest or Promptfoo</b><small>starts the agent on each case</small></div><i aria-hidden="true">→</i>
+    <div><span class="hwl">3 · Agent</span><b>Claude Code + <code>plugin/</code></b><small>Haiku, in a test repo</small></div><i aria-hidden="true">→</i>
+    <div><span class="hwl">4 · What it left</span><b>Outcome and trace</b><small>files, a tag, JSON, the steps</small></div><i aria-hidden="true">→</i>
+    <div class="hwg"><span class="hwl">5 · Grader</span><b>Pass or fail</b><small>code, or an LLM judge</small></div>
+  </div>
+  <table class="hwt" data-in><thead><tr><th>Demo</th><th>Case</th><th>What it left</th><th>Grader</th></tr></thead><tbody>
+    <tr><td><code>make-release</code></td><td>commits after v1.4.2</td><td>the git tag, the commands it ran</td><td>code</td></tr>
+    <tr><td><code>code-review</code></td><td>a patch and the spec</td><td>findings as JSON</td><td>code + LLM judge</td></tr>
+    <tr><td><code>implementer</code></td><td>a UI task</td><td>the page, <code>flags.json</code></td><td>code</td></tr>
+    <tr><td><code>run-implementation-plan</code></td><td>a plan with 1 task</td><td>the order of the stages</td><td>code</td></tr>
+  </tbody></table>
+  <p class="foots" data-in><code>npm test</code> saves every run in <code>runs/</code>. CI reads <code>runs/</code>, spends no tokens, and blocks the merge when a run is missing or older than the skill.</p>
 </section>
 
 <!-- s3 Demo 1 -->
@@ -1271,6 +1356,20 @@ Check what it leaves, not what it says:
 render web/settings.js with all flags off and on, and read flags.json.</pre></div></div><!--/dp-->
 </section>
 
+<!-- Demo 3: how the eval runs 1 case -->
+<section class="slide dm d3h" data-block="5 · Demo 3: implementer" data-time="24:00–31:00" data-toc="Demo 3 · How the eval runs 1 case" data-lab="3" data-gs="run">
+  <p class="kick dk" data-in>Demo 3 · implementer <span class="dst"><i class="cur">Task</i><i>Change</i><i>Evidence</i></span><span class="mode live">Live</span></p>
+  <h2 class="h" data-in>How the eval runs 1 case</h2>
+  <p class="pt" data-in>Vitest and the Claude Agent SDK: real Claude Code on Haiku, your login. Promptfoo is only for the Demo 2 matrix.</p>
+  <div class="d3f" data-in>
+    <div><i>1</i><b>A test repo</b><p>A fresh git repo, made from the lab’s fixture</p><code>lib/world.js</code></div>
+    <div><i>2</i><b>The agent</b><p>Claude Code starts as <code>implementer</code>, with the plugin</p><code>lib/agent.js</code></div>
+    <div><i>3</i><b>It loads the skill</b><p>The task names <code>ui-rules</code>, the agent reads it</p><code>plugin/skills/ui-rules</code></div>
+    <div><i>4</i><b>The checks</b><p>The settings page with flags off and on, and <code>flags.json</code></p><code>labs/flags/flags.test.js</code></div>
+  </div>
+  <p class="foots" data-in><code>lib/</code> runs every lab. <code>labs/flags/</code> is this eval. <code>plugin/</code> is what we test.</p>
+</section>
+
 <!-- 21 D3 change -->
 <section class="slide dm" data-block="5 · Demo 3: implementer" data-time="24:00–31:00" data-toc="Demo 3 · Change: the eval, written from scratch" data-lab="3" data-gs="run">
   <p class="kick dk" data-in>Demo 3 · implementer <span class="dst"><i>Task</i><i class="cur">Change</i><i>Evidence</i></span><span class="mode live">Live</span><span class="dpc" data-prompt="03-implementer"><button type="button" class="dpb" data-copytext="Write an eval for the implementer agent in labs/flags/.&#10;Build it the way labs/lab-2-implementer is built.&#10;Rule: every new UI feature is behind a new flag in flags.json, off by default.&#10;2 cases: &quot;Add a dark mode toggle to the settings page.&quot;,&#10;with the flag named in the task and without it.&#10;Check what it leaves, not what it says:&#10;render web/settings.js with all flags off and on, and read flags.json." title="demos/03-implementer/prompt.md">Copy prompt</button></span><!--/dpc--></p>
@@ -1381,6 +1480,42 @@ Change nothing else.</pre></div></div><!--/dp-->
   <div class="secr g8" data-flat aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="cur"></i><i></i></div>
 </section>
 
+<!-- what CI checks: static and evals in detail -->
+<section class="slide gys" data-block="7 · Merge gate" data-time="40:00–48:00" data-toc="What CI checks: static and evals" data-gs="pass">
+  <h2 class="h" data-in>What CI checks on every PR</h2>
+  <p class="pt" data-in><code>evals.yml</code>: 2 required jobs. No agent runs, so it costs no tokens.</p>
+  <div class="gyj gy1" data-in>
+    <div><b><code>static</code> · ~20 s</b><p>Every <code>plugin/skills/*/SKILL.md</code> starts with its own name and a description of 20+ characters. Every agent in <code>plugin/agents/</code> has a name and a description. A broken file is red before any eval runs.</p></div>
+    <div><b><code>evals</code> · 2 steps</b><p>1. No case is still <code>TODO</code> in <code>cases.json</code> or <code>case.yaml</code>: an unlabelled case checks nothing.<br>2. Every lab runs its checks on the record in <code>runs/</code>:</p>
+      <table class="gyt"><thead><tr><th>Lab</th><th>Cases</th><th>Green when</th></tr></thead><tbody><tr><td><code>make-release</code><small>lab-1a</small></td><td>6 release cases</td><td>the right version, 1 tag and 1 GitHub release, npm test → tag → push; red tests: nothing pushed</td></tr><tr><td><code>code-review</code><small>lab-1b</small></td><td>4 labelled PRs</td><td>valid JSON, every security defect, at least 70% of the labelled defects, the decoy left alone, no CRITICAL on a clean PR</td></tr><tr><td><code>implementer</code><small>lab-2</small></td><td>4 tasks</td><td>done or blocked as expected, only its own folders, only its skills, the house rule in the code, tests ran, hidden tests pass</td></tr><tr><td><code>run-implementation-plan</code><small>lab-3</small></td><td>1 plan + 2 policy cases</td><td>1 implementer per task with its model and skills, the dependencies, stages in order, QA before release for code</td></tr><tr><td><code>LLM judge</code><small>judge</small></td><td>16 release notes</td><td>a verdict on every note, every bad note failed, at most 10% false alarms</td></tr></tbody></table></div>
+  </div>
+  <p class="foots" data-in>A record counts only if <code>plugin/</code> and the case are the same as when <code>npm test</code> made it. Otherwise: <b>the eval has NOT run</b>.</p>
+</section>
+
+<!-- see the gate stop a PR: commands -->
+<section class="slide gps" data-block="7 · Merge gate" data-time="40:00–48:00" data-toc="See the gate stop a PR: the commands" data-gs="fail">
+  <h2 class="h" data-in>See the gate stop a PR</h2>
+  <p class="pt" data-in>Change a skill, skip the evals, open a PR. The branch <code>demo-red-pr</code> has this edit ready.</p>
+  <div class="gpg" data-in>
+    <ol class="gpl">
+      <li><b>Go to the finished gate</b><div class="mkcl gpc"><pre>npm run step gate-done</pre><button type="button" class="dpb" data-copytext="npm run step gate-done">Copy</button></div></li>
+      <li><b>Edit a skill without running the evals</b><div class="mkcl gpc"><pre>git switch -c my-edit
+# change 1 line in plugin/skills/make-release/SKILL.md
+# and do not run npm test
+git commit -am &quot;Reword the release skill&quot;
+git push -u origin my-edit</pre><button type="button" class="dpb" data-copytext="git switch -c my-edit&#10;# change 1 line in plugin/skills/make-release/SKILL.md&#10;# and do not run npm test&#10;git commit -am &quot;Reword the release skill&quot;&#10;git push -u origin my-edit">Copy</button></div></li>
+      <li><b>Open a PR into <code>gate-done</code></b><div class="mkcl gpc"><pre>gh pr create --base gate-done --fill</pre><button type="button" class="dpb" data-copytext="gh pr create --base gate-done --fill">Copy</button></div></li>
+    </ol>
+    <div class="gpr">
+      <span class="gpk">What the PR shows</span>
+      <ul class="cks"><li class="ok"><i class="ck-ok"></i><b>static</b><em>Passed</em></li><li class="bad"><i class="ck-bad"></i><b>evals</b><em>Failed</em></li></ul>
+      <p><code>evals</code> says: the eval has NOT run. <code>runs/</code> was recorded with the old skill.</p>
+      <span class="gpk">Make Merge wait for it</span>
+      <p>Settings → Rules → Rulesets → Require status checks → <code>static</code> and <code>evals</code>, on <code>gate-done</code>.</p>
+    </div>
+  </div>
+</section>
+
 <!-- 28 blocked PR -->
 <section class="slide prx" data-block="7 · Merge gate" data-time="40:00–48:00" data-toc="PR #3 at the gate: red, and a green run next to it" data-steps="1" data-gs="fail,pass">
   <h2 class="h " data-in>The 1-line PR from the start, at the gate</h2>
@@ -1388,15 +1523,15 @@ Change nothing else.</pre></div></div><!--/dp-->
     <ol class="prs"><li data-go="0" class="vb bad"><i></i>PR #3</li><li data-go="1" class="vb ok"><i></i>gate-done</li></ol>
     <div class="prb">
       <div data-pane="0"><header><span class="lbl">Pull request #3 · demo-red-pr into gate-done · run 45923564992</span><b>Reword the release skill</b></header>
-        <p class="prm2 bad">eval-gate failed</p>
-        <ul class="cks"><li class="ok"><i class="ck-ok"></i><b>static</b><span>is every skill and agent well formed?</span><em>Passed</em></li><li class="bad"><i class="ck-bad"></i><b>evals</b><span>the labs on the runs recorded in <code>runs/</code></span><em>Failed</em></li><li class="bad"><i class="ck-bad"></i><b>eval-gate</b><span>fails unless both jobs above succeeded</span><em>Failed</em></li></ul>
+        <p class="prm2 bad">evals failed</p>
+        <ul class="cks"><li class="ok"><i class="ck-ok"></i><b>static</b><span>is every skill and agent well formed?</span><em>Passed</em></li><li class="bad"><i class="ck-bad"></i><b>evals</b><span>the labs on the runs recorded in <code>runs/</code></span><em>Failed</em></li></ul>
         <pre class="asrt"> × lab-1a-release: plugin/ changed after runs/lab-1a-release.json was saved
    the eval has NOT run
 static: success · evals: failure</pre>
-        <ul class="prn"><li><code>evals</code> is red: the run in <code>runs/</code> was made with the old skill, so it says nothing about the new one.</li><li>CI spends no tokens: it never starts the agent.</li><li>GitHub blocks the Merge button once a ruleset requires <code>eval-gate</code>.</li></ul></div>
+        <ul class="prn"><li><code>evals</code> is red: the run in <code>runs/</code> was made with the old skill, so it says nothing about the new one.</li><li>CI spends no tokens: it never starts the agent.</li><li>GitHub blocks the Merge button once a ruleset requires <code>static</code> and <code>evals</code>.</li></ul></div>
       <div data-pane="1"><header><span class="lbl">Push to branch gate-done · no edit to the skill · run 45923560526</span><b>Merge gate: done</b></header>
-        <p class="prm2 ok">eval-gate passed</p>
-        <ul class="cks"><li class="ok"><i class="ck-ok"></i><b>static</b><span>is every skill and agent well formed?</span><em>Passed</em></li><li class="ok"><i class="ck-ok"></i><b>evals</b><span>the labs on the runs recorded in <code>runs/</code></span><em>Passed</em></li><li class="ok"><i class="ck-ok"></i><b>eval-gate</b><span>fails unless both jobs above succeeded</span><em>Passed</em></li></ul>
+        <p class="prm2 ok">evals passed</p>
+        <ul class="cks"><li class="ok"><i class="ck-ok"></i><b>static</b><span>is every skill and agent well formed?</span><em>Passed</em></li><li class="ok"><i class="ck-ok"></i><b>evals</b><span>the labs on the runs recorded in <code>runs/</code></span><em>Passed</em></li></ul>
         <ul class="prn"><li>A separate run on its own branch. It is not a fix of PR #3.</li><li>To turn PR #3 green, run <code>npm test</code> on your machine with the new skill and commit <code>runs/</code>.</li><li>Then the checks say what the edit really does.</li></ul></div>
     </div>
   </div>
@@ -1452,7 +1587,7 @@ static: success · evals: failure</pre>
     <tr><td><code>implementer</code></td><td>new feature behind a flag</td><td>the page it renders, flags off and on</td><td>live, by hand</td><td>not yet</td></tr>
     <tr><td><code>run-implementation-plan</code></td><td>plan vs trace</td><td>the trace of a run</td><td class="y">yes, recorded run</td><td class="y">yes</td></tr>
   </tbody></table>
-  <p class="foots" data-in>The recorded runs go through 1 required check, <code>eval-gate</code>. <b>It fails when a case has no label or when a run in <code>runs/</code> is older than the skill.</b></p>
+  <p class="foots" data-in>The recorded runs go through 2 required checks, <code>static</code> and <code>evals</code>. <b>It fails when a case has no label or when a run in <code>runs/</code> is older than the skill.</b></p>
 </section>
 
 <!-- s8 summary -->
@@ -1611,12 +1746,13 @@ You are the implementer on this team. You get one task from the plan and turn it
 
 - Touch only `Owned paths`. If the task needs a change anywhere else, stop and report it as blocked.
 - Do what the task asks and nothing more: no refactors on the side, no new dependencies.
-- Add or update a test for the behaviour you changed.
+- Add or update a test for the behaviour you changed when its test file is in `Owned paths`. If it is not, name the missing test in your report. That alone is not a reason to block.
 
 ## Before you report
 
 - Run the full test suite before you report.
 - If the task can't be done as written, because the data does not exist or a house rule forbids it, do not guess. Report it as blocked.
+- A small open detail is not a blocker. Take the plainest reading that fits the code, and say which one you took.
 
 ## Report
 
