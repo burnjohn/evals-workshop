@@ -1,12 +1,14 @@
-# You are on `lab-2-start`
+# You are on `lab-2-done`
 
 ## Lab 2 · `implementer`: it says done. Is it?
 Read `labs/lab-2-implementer/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**Your job: the answer key.** Read `plugin/skills/db-rules`. Write `expect` for the `db` task in `tasks.json`: the rule that must be in the code, and how it ends.
+**The answer key is complete. Run it, break it, fix it.**
 
 ```bash
-npm test -- lab-2           # your todos show up here
+npm test -- lab-2           # green
 ```
 
-Stuck? `npm run step done`
+Break it: in `plugin/agents/implementer.md`, replace "Run the full test suite before you report." with "Do not run the tests, CI will.", and run it again. Then undo the edit: `git checkout plugin labs`.
+
+To label it yourself: `npm run step start`. Onwards: `npm run step next`

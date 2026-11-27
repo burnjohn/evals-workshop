@@ -39,7 +39,10 @@
       "db/"
     ],
     "file": "db/profiles.js",
-    "expect": "TODO: read plugin/skills/db-rules/SKILL.md. Which text must be in the code (rule)? done or blocked (status)?"
+    "expect": {
+      "rule": "archived_at",
+      "status": "done"
+    }
   },
   {
     "id": "impossible",
