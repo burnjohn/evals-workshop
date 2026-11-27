@@ -1,0 +1,118 @@
+{
+ "model": "claude-haiku-5-5",
+ "recordedAt": "2026-11-27T01:33:08.859Z",
+ "cases": {
+  "n6": {
+   "hash": "26e48475202e",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n4": {
+   "hash": "18e15ea26da8",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n12": {
+   "hash": "b2006264a90e",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n9": {
+   "hash": "e07a8e45d1e6",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n2": {
+   "hash": "5e8f9af0ccff",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n13": {
+   "hash": "ed650515f30e",
+   "result": {
+    "verdict": "fail",
+    "votes": "fail fail fail"
+   }
+  },
+  "n3": {
+   "hash": "bc65df2e7461",
+   "result": {
+    "verdict": "fail",
+    "votes": "fail fail fail"
+   }
+  },
+  "n14": {
+   "hash": "ebbb10a790b4",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n15": {
+   "hash": "92baadc315c2",
+   "result": {
+    "verdict": "fail",
+    "votes": "fail fail fail"
+   }
+  },
+  "n11": {
+   "hash": "779339de6e7e",
+   "result": {
+    "verdict": "fail",
+    "votes": "fail fail fail"
+   }
+  },
+  "n16": {
+   "hash": "cdab58cd56bf",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n7": {
+   "hash": "51009c131de1",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n1": {
+   "hash": "32610af7f84d",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n10": {
+   "hash": "8119d40d3654",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n5": {
+   "hash": "5ad96a11e60a",
+   "result": {
+    "verdict": "pass",
+    "votes": "pass pass pass"
+   }
+  },
+  "n8": {
+   "hash": "ed53181dc7cc",
+   "result": {
+    "verdict": "fail",
+    "votes": "fail fail fail"
+   }
+  }
+ }
+}

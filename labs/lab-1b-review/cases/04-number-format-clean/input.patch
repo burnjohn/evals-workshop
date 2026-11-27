@@ -1,0 +1,42 @@
+Title: feat: en-US number format for the analytics page
+
+Spec: docs/specs/analytics-dashboard-spec.md
+Covers: AC-1.3 (numbers only). One helper and its test. Nothing uses it yet; the KPI cards switch to it in the next PR.
+
+diff --git a/client/src/utils/formatNumber.js b/client/src/utils/formatNumber.js
+--- /dev/null
++++ b/client/src/utils/formatNumber.js
+@@ -0,0 +1,9 @@
++// AC-1.3: numbers are formatted en-US (1,234) whatever the browser locale
++const formatter = new Intl.NumberFormat('en-US')
++
++// A number, or a numeric string from the API. Anything else (null, '', 'abc') shows a dash.
++export const formatNumber = (value) => {
++  const n = typeof value === 'string' && value.trim() !== '' ? Number(value) : value
++  return typeof n === 'number' && Number.isFinite(n) ? formatter.format(n) : '—'
++}
++
+diff --git a/client/src/utils/formatNumber.test.js b/client/src/utils/formatNumber.test.js
+--- /dev/null
++++ b/client/src/utils/formatNumber.test.js
+@@ -0,0 +1,19 @@
++import { describe, it, expect } from 'vitest'
++import { formatNumber } from './formatNumber'
++
++describe('formatNumber', () => {
++  it('groups thousands with a comma', () => {
++    expect(formatNumber(1234)).toBe('1,234')
++  })
++
++  it('keeps small numbers as they are', () => {
++    expect(formatNumber(7)).toBe('7')
++  })
++
++  it('formats a number sent as a string', () => {
++    expect(formatNumber('1234')).toBe('1,234')
++  })
++
++  it('shows a dash for anything that is not a number', () => {
++    for (const v of [undefined, null, '', 'abc', NaN]) expect(formatNumber(v)).toBe('—')
++  })
++})

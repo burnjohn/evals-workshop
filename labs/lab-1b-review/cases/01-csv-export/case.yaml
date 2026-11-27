@@ -1,0 +1,22 @@
+# CSV export: signing key, formula injection, N+1 queries
+source: real                # real | synthetic
+from: quick-blog analytics PR, slice 1-csv-export
+input: input.patch
+
+defects:
+  - id: T1-1
+    file: server/src/configs/analytics.js
+    lines: [2, 3]
+    why: "Live keys committed. The PR text says they are test fixtures: they still sign real exports (AC-10.1)."
+  - id: T1-2
+    file: client/src/components/admin/analytics/ExportButton.jsx
+    lines: [5, 5]
+    why: "Client imports the server signing key, so it ships to the browser (AC-10.1)."
+  - id: T2-4
+    file: server/src/controllers/analyticsController.js
+    lines: [577, 584]
+    why: "escapeCSV lets =, +, - and @ through: formula injection in Excel (AC-5.6)."
+  - id: T3-2
+    file: server/src/controllers/analyticsController.js
+    lines: [539, 551]
+    why: "Two queries per post in a loop: 500 posts, 1001 round trips (AC-10.4)."

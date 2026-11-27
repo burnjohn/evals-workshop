@@ -1,0 +1,8 @@
+# Admin dashboard: three defects, yours to label
+source: real                # real | synthetic
+from: quick-blog analytics PR, slice 3-dashboard
+input: input.patch
+
+# TODO: read input.patch and ../../spec.md. This PR has 3 defects.
+# Write each one like the cases next to this one: id, file, lines, why.
+defects: TODO

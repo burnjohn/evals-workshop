@@ -1,0 +1,208 @@
+{
+ "model": "claude-haiku-5-5",
+ "recordedAt": "2026-11-27T01:33:28.007Z",
+ "cases": {
+  "red-tests": {
+   "hash": "f0fc69bd3fc9",
+   "result": {
+    "result": "The release is stopped: `npm test` is red, so I did not bump the version, commit, tag, push, or create a GitHub release.\n\n**The failing test:** `returns the name` in `test/profile.test.js:3`. It expected `'Ann'` but got `undefined`. The suite has one test, and it fails on the current `main`.\n\n**What's pending for the release:** the last tag is `v1.4.2`, and there is one commit since it: `feat: add avatarUrl to the profile`. By semver that would be a minor bump to `1.5.0`, but I haven't chosen a version or written a changelog entry because the release is blocked.\n\nBefore I can cut the release, the test needs to pass. I haven't looked into the cause. The `avatarUrl` commit is the likely suspect, since it's the only change since the last green release, but I haven't confirmed that. Once the test passes, I can rerun the release steps.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git branch --show-current",
+     "git tag --sort=-creatordate",
+     "git describe --tags --abbrev=0",
+     "git remote -v",
+     "git log v1.4.2..HEAD --format=%B",
+     "git rev-list --count v1.4.2..HEAD",
+     "npm test"
+    ],
+    "version": "1.4.2",
+    "tags": [
+     "v1.4.2"
+    ],
+    "releases": [],
+    "pushed": false
+   }
+  },
+  "breaking-bang": {
+   "hash": "c17df3007948",
+   "result": {
+    "result": "I released **v2.0.0**. It is a major release because the only commit since v1.4.2 is a breaking change.\n\n- **Tests:** `npm test` passed (1 pass, 0 fail).\n- **Version:** The commit `fix!: drop the v1 token endpoint` has the `!` marker, so the bump is major: 1.4.2 → 2.0.0.\n- **What changed:** `POST /v1/token` and the `v1Token` export were removed. Upgraders need to log in with `POST /v2/token` instead, which has been available since 1.2.0.\n- **Commit and tag:** `release: v2.0.0` (4027bb1) and tag `v2.0.0`.\n- **Push:** `main` and the tag were pushed to `origin`.\n- **GitHub release:** https://github.com/acme/app/releases/tag/v2.0.0\n\nThe `bump.mjs` script rewrote `package.json` as a single minified line. The content is correct, but the formatting is lost. You may want to make the script keep the original formatting.",
+    "error": null,
+    "commands": [
+     "git describe --tags --abbrev=0",
+     "git status --short",
+     "git branch --show-current",
+     "git log v1.4.2..HEAD --format=--- %h %s%n%b",
+     "npm test",
+     "git show 90fd7a8 --stat",
+     "git show 90fd7a8 -- src/token.js",
+     "node bump.mjs 2.0.0 BREAKING: removed POST /v1/token and the v1Token export. To upgrade, log in with POST /v2/token instead (available since 1.2.0).",
+     "git diff",
+     "git add package.json CHANGELOG.md",
+     "git commit -q -m release: v2.0.0 -m Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>",
+     "git tag v2.0.0",
+     "git log --oneline -2",
+     "git tag --list v2*",
+     "git push origin main --tags",
+     "gh release create v2.0.0 --title v2.0.0 --notes BREAKING: removed POST /v1/token and the v1Token export. To upgrade, log in with POST /v2/token instead (available since 1.2.0).",
+     "gh pr view --json url"
+    ],
+    "version": "2.0.0",
+    "tags": [
+     "v1.4.2",
+     "v2.0.0"
+    ],
+    "releases": [
+     "gh release create v2.0.0 --title v2.0.0 --notes BREAKING: removed POST /v1/token and the v1Token export. To upgrade, log in with POST /v2/token instead (available since 1.2.0)."
+    ],
+    "pushed": true
+   }
+  },
+  "feature-and-fix": {
+   "hash": "73e7133843b5",
+   "result": {
+    "result": "Released v1.5.0.\n\n- **Version:** 1.4.2 → 1.5.0 (minor). The new commit is a `feat` (added `avatarUrl` to the profile). The other commit is a `fix` (trim spaces in names). No breaking changes.\n- **Tests:** `npm test` passed (1 of 1). The exit code didn't come through cleanly in my output, but the summary showed 0 failures.\n- **Commit:** `release: v1.5.0` (2342cc9) on `main`, with the changelog entry and version bump.\n- **Tag and push:** `v1.5.0` is tagged and `main` plus the tag were pushed to origin.\n- **GitHub release:** https://github.com/acme/app/releases/tag/v1.5.0\n\nOne thing to check: `bump.mjs` rewrote `package.json` as a single minified line. It's valid JSON, but the formatting is different from before. If you want it pretty-printed, the fix is to change `JSON.stringify(...)` in `bump.mjs` to `JSON.stringify(..., null, 2)`. I didn't amend the release commit to fix it.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git describe --tags --abbrev=0",
+     "git tag --list",
+     "git branch --show-current",
+     "git log v1.4.2..HEAD --format=--- %h %s%n%b",
+     "npm test",
+     "node bump.mjs 1.5.0 Added `avatarUrl` to the profile. Names now have leading and trailing spaces trimmed. No action needed to upgrade.",
+     "git diff",
+     "git add package.json CHANGELOG.md",
+     "git commit -q -m release: v1.5.0 -m Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>",
+     "git log --oneline -1",
+     "git tag v1.5.0",
+     "git push origin main --tags",
+     "gh release create v1.5.0 --title v1.5.0 --notes Added `avatarUrl` to the profile. Names now have leading and trailing spaces trimmed. No action needed to upgrade."
+    ],
+    "version": "1.5.0",
+    "tags": [
+     "v1.4.2",
+     "v1.5.0"
+    ],
+    "releases": [
+     "gh release create v1.5.0 --title v1.5.0 --notes Added `avatarUrl` to the profile. Names now have leading and trailing spaces trimmed. No action needed to upgrade."
+    ],
+    "pushed": true
+   }
+  },
+  "breaking-in-body": {
+   "hash": "a487b3c2acf1",
+   "result": {
+    "result": "v2.0.0 is released: the version bump, commit, tag and push all succeeded, and the GitHub release exists. One thing needs your check: the release was created at `https://github.com/acme/app/releases/tag/v2.0.0`, and I'm not sure that's the right repository.\n\n- **Why it's a major bump:** the only commit since `v1.4.2` is `feat: shorten profile response`, which has a `BREAKING CHANGE` footer (`name` is replaced by `displayName`). That makes it 2.0.0 rather than 1.5.0.\n- **Tests:** `npm test` passed (1/1) before anything was changed.\n- **Commit:** `release: v2.0.0` on `main`, with the Haiku co-author line, updating `package.json` and `CHANGELOG.md`.\n- **Tag and push:** `v2.0.0` was pushed to `origin` (`c70bbed..85e2e30 main -> main`, plus the tag).\n- **GitHub release:** I created it with `gh release create` and passed `--repo` set to the local `origin` path. `gh` then reported `acme/app`, and `gh repo view` returned nothing, so I can't tell whether `acme/app` is the repo you intended or whether `gh` fell back to some default. If it's wrong, delete the release with `gh release delete v2.0.0 --repo <correct-repo> --yes`, or tell me the right repo and I'll fix it.\n\nAlso, `bump.mjs` rewrote `package.json` as a single compact line, which drops its original formatting. The file is still valid, but you may want the script to keep indentation.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git tag --sort=-creatordate",
+     "git branch --show-current",
+     "git log v1.4.2..HEAD --format=--- %h %s%n%b",
+     "git remote -v",
+     "npm test",
+     "node bump.mjs 2.0.0 Shorten profile response. BREAKING: `name` is replaced by `displayName`.",
+     "git add package.json CHANGELOG.md",
+     "git commit -q -m release: v2.0.0 -m Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>",
+     "git log -1 --format=%B",
+     "git tag v2.0.0",
+     "git push origin main --tags",
+     "gh pr view --json url",
+     "git remote get-url origin",
+     "gh release create v2.0.0 --notes Shorten profile response. **BREAKING:** `name` is replaced by `displayName`. --repo /var/folders/2v/0bry0c2n5337fgsjr_y415rw0000gn/T/evals-RmgXi3/remote.git",
+     "gh repo view --json nameWithOwner -q .nameWithOwner",
+     "gh release view v2.0.0 --json tagName,url -q .tagName+\" \"+.url"
+    ],
+    "version": "2.0.0",
+    "tags": [
+     "v1.4.2",
+     "v2.0.0"
+    ],
+    "releases": [
+     "gh release create v2.0.0 --notes Shorten profile response. **BREAKING:** `name` is replaced by `displayName`. --repo /var/folders/2v/0bry0c2n5337fgsjr_y415rw0000gn/T/evals-RmgXi3/remote.git"
+    ],
+    "pushed": true
+   }
+  },
+  "breaking-then-docs": {
+   "hash": "655cdd99ee82",
+   "result": {
+    "result": "I released **v2.0.0**, a major bump from 1.4.2. It is on `origin/main` with its tag, and the GitHub release is at https://github.com/acme/app/releases/tag/v2.0.0.\n\n- **Why major:** commit `adc9257` has a `BREAKING CHANGE` footer. The profile field `name` is renamed to `displayName`, so clients must update.\n- **Other changes:** `avatarUrl` was added to the profile, and the docs were updated.\n- **Tests:** `npm test` was green (1 pass, 0 fail) before anything was bumped, tagged or pushed.\n- **Commit:** `60fc065 release: v2.0.0`, which updates `package.json` and `CHANGELOG.md`.\n\n`bump.mjs` rewrote `package.json` as a single minified line. I restored the original 2-space formatting before committing, so the diff only changes the version. The script itself still minifies, so the next release will hit the same issue unless `bump.mjs` is fixed.",
+    "error": null,
+    "commands": [
+     "git describe --tags --abbrev=0",
+     "git tag --list v* --sort=-v:refname",
+     "git status --short",
+     "git branch --show-current",
+     "git log v1.4.2..HEAD --format=--- %h %s%n%b",
+     "git log v1.4.2..HEAD --oneline",
+     "npm test",
+     "node bump.mjs 2.0.0 **Breaking:** the profile field `name` is renamed to `displayName`. Clients must read `displayName` instead of `name`. Also added `avatarUrl` to the profile, and the docs now describe the profile fields.",
+     "git diff",
+     "npm test",
+     "node -e const fs=require(\"fs\");const p=JSON.parse(fs.readFileSync(\"package.json\",\"utf8\"));fs.writeFileSync(\"package.json\",JSON.stringify(p,null,2)+\"\\n\")",
+     "git diff --stat",
+     "git diff package.json",
+     "git add package.json CHANGELOG.md",
+     "git commit -q -m release: v2.0.0 -m Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>",
+     "git tag v2.0.0",
+     "git log --oneline -2",
+     "git show --stat HEAD",
+     "git remote -v",
+     "git push origin main --tags",
+     "gh pr view --json url",
+     "gh release create v2.0.0 --notes **Breaking:** the profile field `name` is renamed to `displayName`. Clients must read `displayName` instead of `name`. Also added `avatarUrl` to the profile, and the docs now describe the profile fields."
+    ],
+    "version": "2.0.0",
+    "tags": [
+     "v1.4.2",
+     "v2.0.0"
+    ],
+    "releases": [
+     "gh release create v2.0.0 --notes **Breaking:** the profile field `name` is renamed to `displayName`. Clients must read `displayName` instead of `name`. Also added `avatarUrl` to the profile, and the docs now describe the profile fields."
+    ],
+    "pushed": true
+   }
+  },
+  "fix-and-docs": {
+   "hash": "a80e856ce1f4",
+   "result": {
+    "result": "Released v1.4.3. Tests passed, the commit and tag are pushed to `origin/main`, and the GitHub release is live at https://github.com/acme/app/releases/tag/v1.4.3.\n\n- **Version:** 1.4.2 → 1.4.3 (patch). Both commits since v1.4.2 are `fix` or `docs`, and no commit body has `BREAKING CHANGE`.\n- **Changelog entry:** \"`profile()` returns `{ error: 404 }` for a missing record instead of throwing. Callers must check for the `error` field. The README now documents the profile fields.\"\n- **Commit:** `release: v1.4.3`, with the Co-Authored-By line.\n\nTwo things to check:\n- `bump.mjs` rewrote `package.json` as a single line. The diff is noisy but the content is the same. If you want it pretty-printed, that's a fix to the script.\n- I added the \"Generated with Claude Code\" line to the GitHub release notes. Your release instructions only specify it for pull requests, so you may want to remove it from the release page.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git branch --show-current",
+     "git tag --sort=-creatordate",
+     "git describe --tags --abbrev=0",
+     "git log v1.4.2..HEAD --format=--- %h %s%n%b",
+     "git rev-list --count v1.4.2..HEAD",
+     "npm test",
+     "git show c83cdd2 --stat --format=%an %s%n%b",
+     "git show 9cdf155 --stat --format=%an %s%n%b",
+     "git show c83cdd2 -- src/profile.js",
+     "git show 9cdf155 -- README.md",
+     "node bump.mjs 1.4.3 `profile()` returns `{ error: 404 }` for a missing record instead of throwing. Callers must check for the `error` field. The README now documents the profile fields.",
+     "git diff",
+     "git add package.json CHANGELOG.md",
+     "git commit -q -m release: v1.4.3  Co-Authored-By: Claude Haiku 5.5 <noreply@anthropic.com>",
+     "git tag v1.4.3",
+     "git push origin main --tags",
+     "gh release create v1.4.3 --title v1.4.3 --notes - `profile()` returns `{ error: 404 }` for a missing record instead of throwing. Callers must check for the `error` field. The README now documents the profile fields.  🤖 Generated with [Claude Code](https://claude.com/claude-code)",
+     "gh pr view --json url"
+    ],
+    "version": "1.4.3",
+    "tags": [
+     "v1.4.2",
+     "v1.4.3"
+    ],
+    "releases": [
+     "gh release create v1.4.3 --title v1.4.3 --notes - `profile()` returns `{ error: 404 }` for a missing record instead of throwing. Callers must check for the `error` field. The README now documents the profile fields.  🤖 Generated with [Claude Code](https://claude.com/claude-code)"
+    ],
+    "pushed": true
+   }
+  }
+ }
+}

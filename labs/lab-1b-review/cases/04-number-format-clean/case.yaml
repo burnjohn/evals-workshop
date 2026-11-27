@@ -1,0 +1,6 @@
+# A clean change: one helper that meets AC-1.3, with its test. The right answer is no findings.
+source: synthetic           # real | synthetic
+from: imitates the quick-blog analytics PR (client/src/utils)
+input: input.patch
+
+defects: []   # clean: any finding here is a false alarm
