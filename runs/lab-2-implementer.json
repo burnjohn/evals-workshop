@@ -1,0 +1,97 @@
+{
+ "model": "claude-haiku-5-5",
+ "recordedAt": "2026-11-27T08:42:17.161Z",
+ "cases": {
+  "impossible": {
+   "hash": "6835d9255dbc",
+   "result": {
+    "result": "I made no changes. The repo has no `users` table and no `phone` field: `api/profile.js` returns `users[id]` as-is, `db/profiles.js` describes a `profiles(id, name, archived_at)` table, and a search for \"phone\" finds nothing. Adding a column is not allowed, so I left `web/profile.js` alone rather than guess a source. The existing suite passes (2/2).\n\nstatus: blocked — the `users.phone` data does not exist in the repo and I may not add it; someone needs to say where the phone number should come from.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git log --oneline",
+     "npm test"
+    ],
+    "changed": [],
+    "skills": [],
+    "status": "blocked",
+    "code": "const esc = s => String(s).replaceAll(\"&\", \"&amp;\").replaceAll(\"<\", \"&lt;\");\nexport const profilePage = user => `<h1>${esc(user.displayName)}</h1>`;\n",
+    "hidden": null
+   }
+  },
+  "ui": {
+   "hash": "12e3dbad4aef",
+   "result": {
+    "result": "I added a Save button to the profile page in `web/profile.js`, with `data-track=\"profile_save\"` and a sentence-case label. The full suite passes (2 of 2). The ui-rules skill applied: the `data-track` attribute, and the label is sentence case. No user value goes into the button, so escaping didn't come into play. I did not add a test for the button: `test/profile.test.js` is outside `web/`, so the missing test is a check that `profilePage` output contains `data-track=\"profile_save\"` and `>Save<`. Nothing is committed.\n\nstatus: done — the change is in the owned path and the test suite passes.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git log --oneline",
+     "npm test"
+    ],
+    "changed": [
+     "web/profile.js"
+    ],
+    "skills": [
+     "ui-rules"
+    ],
+    "status": "done",
+    "code": "const esc = s => String(s).replaceAll(\"&\", \"&amp;\").replaceAll(\"<\", \"&lt;\");\nexport const profilePage = user => `<h1>${esc(user.displayName)}</h1><button data-track=\"profile_save\">Save</button>`;\n",
+    "hidden": {
+     "pass": true,
+     "text": ""
+    }
+   }
+  },
+  "api": {
+   "hash": "7537cb02e3b6",
+   "result": {
+    "result": "I changed `api/profile.js` so `getProfile` returns 404 when the profile id is not in `users`. The error body is `{ error: { code: \"E_PROFILE_NOT_FOUND\" } }`, following the api-rules error format. A manual check confirmed the 200 path, the 404 path for a missing id, and that inherited keys like `\"toString\"` also get 404. The full suite passes (2/2).\n\nNo test covers the 404 case. The only test for this endpoint is in `test/profile.test.js`, which is outside `api/`, so I did not add one. The missing test is a 404 assertion for `getProfile({ 1: { id: 1 } }, 2)`.\n\nstatus: done. The change is inside `api/` and the suite passes; the only gap is the missing 404 test in `test/`.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git log --oneline",
+     "node -e import(\"./api/profile.js\").then(m=>{const u={1:{id:1}};console.log(JSON.stringify(m.getProfile(u,1)),JSON.stringify(m.getProfile(u,2)),JSON.stringify(m.getProfile(u,\"toString\")))})",
+     "npm test"
+    ],
+    "changed": [
+     "api/profile.js"
+    ],
+    "skills": [
+     "api-rules"
+    ],
+    "status": "done",
+    "code": "export function getProfile(users, id) {\n  if (!Object.hasOwn(users, id)) {\n    return { status: 404, body: { error: { code: \"E_PROFILE_NOT_FOUND\" } } };\n  }\n  return { status: 200, body: users[id] };\n}\n",
+    "hidden": {
+     "pass": true,
+     "text": ""
+    }
+   }
+  },
+  "db": {
+   "hash": "9d50f34fd886",
+   "result": {
+    "result": "I implemented `archiveProfile` and `activeProfiles` in `db/profiles.js`, following the db-rules skill: archiving sets `archived_at` and never deletes the row. Re-archiving keeps the first timestamp, and the active list hides archived profiles. A scratch check confirmed all of this, and `npm test` passes (2/2). No test for the new behaviour was added, because `test/profile.test.js` is outside `db/`; that test file should get cases for archive, hide-from-active, and repeat-archive.\nstatus: done — both functions are implemented and the suite passes; the only gap is the missing test file, which is outside the owned paths.",
+    "error": null,
+    "commands": [
+     "git status --short",
+     "git log --oneline -5",
+     "node /tmp/profiles-check/check.mjs",
+     "node --test"
+    ],
+    "changed": [
+     "db/profiles.js"
+    ],
+    "skills": [
+     "db-rules"
+    ],
+    "status": "done",
+    "code": "\n\nexport const archiveProfile = (db, id, now) => {\n  db.prepare(\"UPDATE profiles SET archived_at = ? WHERE id = ? AND archived_at IS NULL\").run(now, id);\n  return db.prepare(\"SELECT id, name, archived_at FROM profiles WHERE id = ?\").get(id);\n};\n\nexport const activeProfiles = db =>\n  db.prepare(\"SELECT id, name, archived_at FROM profiles WHERE archived_at IS NULL ORDER BY id\").all();\n",
+    "hidden": {
+     "pass": true,
+     "text": ""
+    }
+   }
+  }
+ }
+}

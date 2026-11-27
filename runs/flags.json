@@ -1,0 +1,54 @@
+{
+ "model": "claude-haiku-5-5",
+ "recordedAt": "2026-11-27T08:42:18.220Z",
+ "cases": {
+  "told": {
+   "hash": "5f098083bb31",
+   "result": {
+    "result": "Added the Dark mode toggle to the settings page behind a new `dark_mode` flag, which is false by default. Changes are in `flags.json` and `web/settings.js`. The toggle is a checkbox, so it has no `<button>` and needs no `data-track`. Its label is sentence case and uses only constant text, so nothing needed escaping. The full suite passes (3/3), and I checked the output with the flag on and off. House rules applied: `ui-rules`.\n\nGaps: `test/settings.test.js` is outside my owned paths, so I didn't add a test for the flag. It should cover the toggle appearing only when `dark_mode` is true. The checkbox also doesn't change the page's colours yet; the task only asked for the toggle, so that wiring is still to do.\n\nstatus: done. The task is complete within my owned paths; the missing test and the unwired theme are listed above for follow-up.",
+    "error": null,
+    "changed": [
+     "flags.json",
+     "web/settings.js"
+    ],
+    "skills": [
+     "ui-rules"
+    ],
+    "status": "done",
+    "added": [
+     "dark_mode"
+    ],
+    "values": {
+     "beta_search": false,
+     "dark_mode": false
+    },
+    "off": "<h1>Settings</h1>\n<label>Name <input name=\"name\" value=\"Ann\"></label>\n<button data-track=\"settings_save\">Save</button>",
+    "on": "<h1>Settings</h1>\n<label>Name <input name=\"name\" value=\"Ann\"></label>\n<label><input type=\"checkbox\" name=\"dark_mode\"> Dark mode</label>\n<button data-track=\"settings_save\">Save</button>"
+   }
+  },
+  "plain": {
+   "hash": "0f96b48e2e68",
+   "result": {
+    "result": "I added a \"Dark mode\" checkbox to the settings page, gated by a new `dark_mode` flag that defaults to `false`. The edits are in `web/settings.js` and `flags.json`, and `npm test` passes (3/3). The ui-rules house rules applied: sentence-case label, escaped user values, and reuse of the existing `button` helper. The checkbox is not a `<button>`, so it has no `data-track`, matching the `beta_search` control in `search.js`.\n\nThe toggle is hidden until `dark_mode` is set to `true`. Nothing applies the dark theme yet, so the checkbox doesn't change anything. The missing test is one that checks the toggle appears only when `dark_mode` is on. It belongs in `test/settings.test.js`, which is outside my owned paths, so I didn't add it. I haven't committed.\n\nstatus: done — the feature is in place and tests pass; the dark-mode test and the theme itself are not part of this change.",
+    "error": null,
+    "changed": [
+     "flags.json",
+     "web/settings.js"
+    ],
+    "skills": [
+     "ui-rules"
+    ],
+    "status": "done",
+    "added": [
+     "dark_mode"
+    ],
+    "values": {
+     "beta_search": false,
+     "dark_mode": false
+    },
+    "off": "<h1>Settings</h1>\n<label>Name <input name=\"name\" value=\"Ann\"></label>\n<button data-track=\"settings_save\">Save</button>",
+    "on": "<h1>Settings</h1>\n<label>Name <input name=\"name\" value=\"Ann\"></label>\n<label><input type=\"checkbox\" name=\"dark_mode\"> Dark mode</label>\n<button data-track=\"settings_save\">Save</button>"
+   }
+  }
+ }
+}

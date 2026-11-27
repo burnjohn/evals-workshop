@@ -1,0 +1,118 @@
+[
+  {
+    "id": "n1",
+    "note": "Breaking: the profile returns displayName instead of name. Read displayName.",
+    "person": {
+      "verdict": "pass",
+      "why": "Says what to do."
+    }
+  },
+  {
+    "id": "n2",
+    "note": "New: profiles can be archived. Nothing to change on your side.",
+    "person": {
+      "verdict": "pass",
+      "why": "Says there is nothing to do."
+    }
+  },
+  {
+    "id": "n3",
+    "note": "Various improvements to the profile response.",
+    "person": {
+      "verdict": "fail",
+      "why": "Hides a breaking change."
+    }
+  },
+  {
+    "id": "n4",
+    "note": "Fix: an empty profile no longer returns 500.",
+    "person": {
+      "verdict": "pass",
+      "why": "Clear effect."
+    }
+  },
+  {
+    "id": "n5",
+    "note": "Breaking: errors now have a code. Switch on error.code, not on the message text.",
+    "person": {
+      "verdict": "pass",
+      "why": "Says what to do."
+    }
+  },
+  {
+    "id": "n6",
+    "note": "Fix: long names are no longer cut at 20 characters.",
+    "person": {
+      "verdict": "pass",
+      "why": "Clear effect."
+    }
+  },
+  {
+    "id": "n7",
+    "note": "New: the Save button reports clicks. Opt out with track: false.",
+    "person": {
+      "verdict": "pass",
+      "why": "Says how to opt out."
+    }
+  },
+  {
+    "id": "n8",
+    "note": "Breaking: the profile changed, see the code.",
+    "person": {
+      "verdict": "fail",
+      "why": "The reader does not know what to do."
+    }
+  },
+  {
+    "id": "n9",
+    "note": "Fix: the audit log now records the old name next to the new one. Nothing to change on your side.",
+    "person": {
+      "verdict": "pass",
+      "why": "Clear effect."
+    }
+  },
+  {
+    "id": "n10",
+    "note": "Internal: faster tests. Nothing changes for you.",
+    "person": {
+      "verdict": "pass",
+      "why": "Says there is nothing to do."
+    }
+  },
+  {
+    "id": "n11",
+    "note": "Updated dependencies.",
+    "person": {
+      "verdict": "fail",
+      "why": "Could break anything, says nothing."
+    }
+  },
+  {
+    "id": "n12",
+    "note": "Breaking: GET /v1/token is removed. Call POST /v2/token with the same body.",
+    "person": {
+      "verdict": "pass",
+      "why": "Names the old call and the new one."
+    }
+  },
+  {
+    "id": "n13",
+    "note": "Refactored the settings page.",
+    "person": "TODO: pass or fail, and one sentence why. The question is in judge.md."
+  },
+  {
+    "id": "n14",
+    "note": "Deprecated: name still works until 3.0. Move to displayName before then.",
+    "person": "TODO: pass or fail, and one sentence why. The question is in judge.md."
+  },
+  {
+    "id": "n15",
+    "note": "Breaking: auth reworked. Update your integration.",
+    "person": "TODO: pass or fail, and one sentence why. The question is in judge.md."
+  },
+  {
+    "id": "n16",
+    "note": "Fix: a missing profile returns 404, not 200 with an empty body. If you checked for an empty body, check the status instead.",
+    "person": "TODO: pass or fail, and one sentence why. The question is in judge.md."
+  }
+]

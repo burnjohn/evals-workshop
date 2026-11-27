@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+*.log
+
+# promptfoo output
+matrix.html
+matrix.json
+.promptfoo/
+

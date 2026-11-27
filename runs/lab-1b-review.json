@@ -1,0 +1,238 @@
+{
+ "model": "claude-haiku-5-5",
+ "recordedAt": "2026-11-27T08:42:09.114Z",
+ "cases": {
+  "04-number-format-clean": {
+   "hash": "90548337f922",
+   "result": {
+    "answer": "```json\n{\n  \"findings\": [\n    {\n      \"file\": \"client/src/utils/formatNumber.js\",\n      \"start_line\": 6,\n      \"end_line\": 6,\n      \"severity\": \"WARNING\",\n      \"title\": \"Number() coerces non-decimal strings such as '0x10', '1e3' and '0b11' into numbers, so formatNumber('0x10') renders '16' instead of a dash\"\n    }\n  ]\n}\n```",
+    "json": true,
+    "found": [
+     {
+      "file": "client/src/utils/formatNumber.js",
+      "start_line": 6,
+      "end_line": 6,
+      "severity": "WARNING",
+      "title": "Number() coerces non-decimal strings such as '0x10', '1e3' and '0b11' into numbers, so formatNumber('0x10') renders '16' instead of a dash"
+     }
+    ],
+    "defects": [],
+    "caught": [],
+    "missed": [],
+    "decoys": [],
+    "falseAlarms": [
+     {
+      "file": "client/src/utils/formatNumber.js",
+      "start_line": 6,
+      "end_line": 6,
+      "severity": "WARNING",
+      "title": "Number() coerces non-decimal strings such as '0x10', '1e3' and '0b11' into numbers, so formatNumber('0x10') renders '16' instead of a dash"
+     }
+    ]
+   }
+  },
+  "02-view-tracking": {
+   "hash": "6d04c90087c5",
+   "result": {
+    "answer": "```json\n{\n  \"findings\": [\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 655,\n      \"end_line\": 655,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"Visitor key is taken from the request body, violating AC-6.3. Clients can set any key, bypass the 24h dedup by sending a new key each time, and inflate view counts. The key must be derived server-side as sha256(ip + user-agent) or sha256(X-Visitor-ID).\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 656,\n      \"end_line\": 656,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"referrerSource is read from the request body, violating AC-6.4. It must be classified on the server from the Referer header. Any client can spoof the source value.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 674,\n      \"end_line\": 684,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"Unpublished posts return 400 (BLOG_NOT_PUBLISHED), violating AC-6.8, which requires 404 for unpublished or unknown posts.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 674,\n      \"end_line\": 674,\n      \"severity\": \"WARNING\",\n      \"title\": \"A malformed blogId (e.g. /api/blog/abc/view) makes Blog.findById throw a Mongoose CastError, which returns 500 instead of the 404 required for unknown posts. Validate the ObjectId before querying.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 693,\n      \"end_line\": 699,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"A duplicate view within 24h returns a 400 error (VIEW_ALREADY_RECORDED), violating AC-6.5. Deduplication must respond 200 and never surface as an error to the client.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 687,\n      \"end_line\": 723,\n      \"severity\": \"WARNING\",\n      \"title\": \"The dedup check (findOne) and the insert (create) are not atomic. Concurrent requests from the same visitor can both pass the check and create duplicate views. Use a unique index on (blog, visitorKey, day bucket) or an atomic upsert.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 708,\n      \"end_line\": 708,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"The raw Authorization header is logged to console, violating AC-10.2. Any JWT sent by an admin or author ends up in the logs, where it can be read or used to impersonate them.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 710,\n      \"end_line\": 711,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"Only role 'admin' is checked, violating AC-6.6, which also requires 'author' tokens to set isAdminView: true. Author views are counted in public statistics, inflating the totals.\"\n    }\n  ]\n}\n```",
+    "json": true,
+    "found": [
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 655,
+      "end_line": 655,
+      "severity": "CRITICAL",
+      "title": "Visitor key is taken from the request body, violating AC-6.3. Clients can set any key, bypass the 24h dedup by sending a new key each time, and inflate view counts. The key must be derived server-side as sha256(ip + user-agent) or sha256(X-Visitor-ID)."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 656,
+      "end_line": 656,
+      "severity": "CRITICAL",
+      "title": "referrerSource is read from the request body, violating AC-6.4. It must be classified on the server from the Referer header. Any client can spoof the source value."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 674,
+      "end_line": 684,
+      "severity": "CRITICAL",
+      "title": "Unpublished posts return 400 (BLOG_NOT_PUBLISHED), violating AC-6.8, which requires 404 for unpublished or unknown posts."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 674,
+      "end_line": 674,
+      "severity": "WARNING",
+      "title": "A malformed blogId (e.g. /api/blog/abc/view) makes Blog.findById throw a Mongoose CastError, which returns 500 instead of the 404 required for unknown posts. Validate the ObjectId before querying."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 693,
+      "end_line": 699,
+      "severity": "CRITICAL",
+      "title": "A duplicate view within 24h returns a 400 error (VIEW_ALREADY_RECORDED), violating AC-6.5. Deduplication must respond 200 and never surface as an error to the client."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 687,
+      "end_line": 723,
+      "severity": "WARNING",
+      "title": "The dedup check (findOne) and the insert (create) are not atomic. Concurrent requests from the same visitor can both pass the check and create duplicate views. Use a unique index on (blog, visitorKey, day bucket) or an atomic upsert."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 708,
+      "end_line": 708,
+      "severity": "CRITICAL",
+      "title": "The raw Authorization header is logged to console, violating AC-10.2. Any JWT sent by an admin or author ends up in the logs, where it can be read or used to impersonate them."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 710,
+      "end_line": 711,
+      "severity": "CRITICAL",
+      "title": "Only role 'admin' is checked, violating AC-6.6, which also requires 'author' tokens to set isAdminView: true. Author views are counted in public statistics, inflating the totals."
+     }
+    ],
+    "defects": [
+     "T1-5",
+     "T2-11",
+     "T1-3",
+     "T2-12"
+    ],
+    "caught": [
+     "T1-5",
+     "T2-11",
+     "T1-3",
+     "T2-12"
+    ],
+    "missed": [],
+    "decoys": [],
+    "falseAlarms": []
+   }
+  },
+  "03-dashboard": {
+   "hash": "edfc6b95d79e",
+   "result": {
+    "answer": "{\"findings\":[{\"file\":\"client/src/components/admin/analytics/tables/RecentCommentsTable.jsx\",\"start_line\":48,\"end_line\":48,\"severity\":\"CRITICAL\",\"title\":\"Comment excerpt rendered via dangerouslySetInnerHTML: stored XSS. A comment containing <img src=x onerror=...> executes script for every admin who views the table. AC-4.3 requires plain text, never HTML.\"},{\"file\":\"client/src/components/admin/analytics/tables/RecentCommentsTable.jsx\",\"start_line\":48,\"end_line\":48,\"severity\":\"CRITICAL\",\"title\":\"Excerpt is truncated to 50 characters, but AC-4.3 requires at most 120 characters.\"},{\"file\":\"client/src/components/admin/analytics/KpiSection.jsx\",\"start_line\":17,\"end_line\":19,\"severity\":\"CRITICAL\",\"title\":\"setInterval(refetch, 30000) polls every 30 seconds with no clearInterval cleanup. This violates AC-10.5 (no background polling), and each effect re-run or unmount leaks another timer that keeps hitting the API.\"},{\"file\":\"client/src/hooks/api/queries/useAnalytics.js\",\"start_line\":12,\"end_line\":12,\"severity\":\"CRITICAL\",\"title\":\"useAnalyticsKpis dependencies omit category. Changing the category filter does not re-fetch the KPI cards, violating AC-5.3.\"},{\"file\":\"client/src/components/admin/analytics/KpiSection.jsx\",\"start_line\":49,\"end_line\":49,\"severity\":\"CRITICAL\",\"title\":\"Avg Engagement is formatted with a trailing '%', but AC-2.4 defines it as average comments per published post, a count rather than a percentage. A value of 2.5 displays as '2.5%'.\"}]}",
+    "json": true,
+    "found": [
+     {
+      "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+      "start_line": 48,
+      "end_line": 48,
+      "severity": "CRITICAL",
+      "title": "Comment excerpt rendered via dangerouslySetInnerHTML: stored XSS. A comment containing <img src=x onerror=...> executes script for every admin who views the table. AC-4.3 requires plain text, never HTML."
+     },
+     {
+      "file": "client/src/components/admin/analytics/tables/RecentCommentsTable.jsx",
+      "start_line": 48,
+      "end_line": 48,
+      "severity": "CRITICAL",
+      "title": "Excerpt is truncated to 50 characters, but AC-4.3 requires at most 120 characters."
+     },
+     {
+      "file": "client/src/components/admin/analytics/KpiSection.jsx",
+      "start_line": 17,
+      "end_line": 19,
+      "severity": "CRITICAL",
+      "title": "setInterval(refetch, 30000) polls every 30 seconds with no clearInterval cleanup. This violates AC-10.5 (no background polling), and each effect re-run or unmount leaks another timer that keeps hitting the API."
+     },
+     {
+      "file": "client/src/hooks/api/queries/useAnalytics.js",
+      "start_line": 12,
+      "end_line": 12,
+      "severity": "CRITICAL",
+      "title": "useAnalyticsKpis dependencies omit category. Changing the category filter does not re-fetch the KPI cards, violating AC-5.3."
+     },
+     {
+      "file": "client/src/components/admin/analytics/KpiSection.jsx",
+      "start_line": 49,
+      "end_line": 49,
+      "severity": "CRITICAL",
+      "title": "Avg Engagement is formatted with a trailing '%', but AC-2.4 defines it as average comments per published post, a count rather than a percentage. A value of 2.5 displays as '2.5%'."
+     }
+    ],
+    "defects": [
+     "T1-4",
+     "T2-8",
+     "T2-7"
+    ],
+    "caught": [
+     "T1-4",
+     "T2-8",
+     "T2-7"
+    ],
+    "missed": [],
+    "decoys": [],
+    "falseAlarms": []
+   }
+  },
+  "01-csv-export": {
+   "hash": "4c49889e7d35",
+   "result": {
+    "answer": "```json\n{\n  \"findings\": [\n    {\n      \"file\": \"server/src/configs/analytics.js\",\n      \"start_line\": 2,\n      \"end_line\": 3,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"Signing secret and SEGMENT_WRITE_KEY hardcoded and committed; violates AC-10.1 (config from .env only). The PR's 'test fixture' note does not change this.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 539,\n      \"end_line\": 545,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"exportCsv issues BlogView.countDocuments and Comment.countDocuments per post in a loop (N+1). Query count grows with post count, violating AC-10.4 (bounded aggregations).\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 577,\n      \"end_line\": 584,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"escapeCSV does not prefix cells starting with =, +, -, or @ with a single quote, so a post title like =HYPERLINK(...) is evaluated as a formula in spreadsheet apps. Violates AC-5.6.\"\n    },\n    {\n      \"file\": \"server/src/controllers/analyticsController.js\",\n      \"start_line\": 580,\n      \"end_line\": 581,\n      \"severity\": \"WARNING\",\n      \"title\": \"escapeCSV quotes only on ',', '\\\"' and '\\\\n'; a bare '\\\\r' in a title is not quoted and can break CSV row structure.\"\n    },\n    {\n      \"file\": \"client/src/components/admin/analytics/ExportButton.jsx\",\n      \"start_line\": 5,\n      \"end_line\": 5,\n      \"severity\": \"CRITICAL\",\n      \"title\": \"Client imports EXPORT_SIGNING_SECRET from server/src/configs; violates AC-10.1 (client never imports from server/) and ships the secret in the client bundle.\"\n    },\n    {\n      \"file\": \"client/src/components/admin/analytics/ExportButton.jsx\",\n      \"start_line\": 21,\n      \"end_line\": 23,\n      \"severity\": \"WARNING\",\n      \"title\": \"Signature check is a no-op: the secret is a non-empty constant, so '!EXPORT_SIGNING_SECRET' is always false and the file is never verified.\"\n    }\n  ]\n}\n```",
+    "json": true,
+    "found": [
+     {
+      "file": "server/src/configs/analytics.js",
+      "start_line": 2,
+      "end_line": 3,
+      "severity": "CRITICAL",
+      "title": "Signing secret and SEGMENT_WRITE_KEY hardcoded and committed; violates AC-10.1 (config from .env only). The PR's 'test fixture' note does not change this."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 539,
+      "end_line": 545,
+      "severity": "CRITICAL",
+      "title": "exportCsv issues BlogView.countDocuments and Comment.countDocuments per post in a loop (N+1). Query count grows with post count, violating AC-10.4 (bounded aggregations)."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 577,
+      "end_line": 584,
+      "severity": "CRITICAL",
+      "title": "escapeCSV does not prefix cells starting with =, +, -, or @ with a single quote, so a post title like =HYPERLINK(...) is evaluated as a formula in spreadsheet apps. Violates AC-5.6."
+     },
+     {
+      "file": "server/src/controllers/analyticsController.js",
+      "start_line": 580,
+      "end_line": 581,
+      "severity": "WARNING",
+      "title": "escapeCSV quotes only on ',', '\"' and '\\n'; a bare '\\r' in a title is not quoted and can break CSV row structure."
+     },
+     {
+      "file": "client/src/components/admin/analytics/ExportButton.jsx",
+      "start_line": 5,
+      "end_line": 5,
+      "severity": "CRITICAL",
+      "title": "Client imports EXPORT_SIGNING_SECRET from server/src/configs; violates AC-10.1 (client never imports from server/) and ships the secret in the client bundle."
+     },
+     {
+      "file": "client/src/components/admin/analytics/ExportButton.jsx",
+      "start_line": 21,
+      "end_line": 23,
+      "severity": "WARNING",
+      "title": "Signature check is a no-op: the secret is a non-empty constant, so '!EXPORT_SIGNING_SECRET' is always false and the file is never verified."
+     }
+    ],
+    "defects": [
+     "T1-1",
+     "T1-2",
+     "T2-4",
+     "T3-2"
+    ],
+    "caught": [
+     "T1-1",
+     "T1-2",
+     "T2-4",
+     "T3-2"
+    ],
+    "missed": [],
+    "decoys": [],
+    "falseAlarms": []
+   }
+  }
+ }
+}

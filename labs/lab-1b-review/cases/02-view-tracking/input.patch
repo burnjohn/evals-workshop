@@ -1,0 +1,82 @@
+Title: feat: count post views
+
+Public POST /view records one view per visitor per 24 hours. Covers AC-6.1 to AC-6.8.
+
+diff --git a/server/src/controllers/analyticsController.js b/server/src/controllers/analyticsController.js
+--- a/server/src/controllers/analyticsController.js
++++ b/server/src/controllers/analyticsController.js
+@@ -653,0 +653,74 @@ new lines 653-726 of a new file
++export const recordView = asyncHandler(async (req, res) => {
++  const blogId = req.params?.blogId
++  const visitorKey = req.body?.visitorKey
++  const referrerSource = req.body?.referrerSource ?? 'direct'
++
++  if (!visitorKey || typeof visitorKey !== 'string' || !visitorKey.trim()) {
++    return sendError(
++      res,
++      ERROR_MESSAGES.MISSING_VISITOR_KEY,
++      HTTP_STATUS.BAD_REQUEST
++    )
++  }
++
++  if (!referrerSourceEnum.includes(referrerSource)) {
++    return sendError(
++      res,
++      'referrerSource must be one of: direct, search, social, other',
++      HTTP_STATUS.BAD_REQUEST
++    )
++  }
++
++  const blog = await Blog.findById(blogId).select('isPublished').lean()
++  if (!blog) {
++    return sendError(res, ERROR_MESSAGES.BLOG_NOT_FOUND, HTTP_STATUS.NOT_FOUND)
++  }
++  if (!blog.isPublished) {
++    return sendError(
++      res,
++      ERROR_MESSAGES.BLOG_NOT_PUBLISHED,
++      HTTP_STATUS.BAD_REQUEST
++    )
++  }
++
++  const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000)
++  const existing = await BlogView.findOne({
++    blog: blogId,
++    visitorKey: visitorKey.trim(),
++    viewedAt: { $gte: twentyFourHoursAgo }
++  })
++
++  if (existing) {
++    return sendError(
++      res,
++      ERROR_MESSAGES.VIEW_ALREADY_RECORDED,
++      HTTP_STATUS.BAD_REQUEST
++    )
++  }
++
++  let isAdminView = false
++  const authHeader = req.headers?.authorization
++  if (authHeader) {
++    const token = authHeader.startsWith('Bearer ')
++      ? authHeader.split(' ')[1]
++      : authHeader
++    try {
++      console.log('[analytics] auth header:', req.headers.authorization)
++      const decoded = jwt.verify(token, process.env.JWT_SECRET)
++      if (decoded?.role === 'admin') {
++        isAdminView = true
++      }
++    } catch {
++      // Invalid/expired token — treat as non-admin view
++    }
++  }
++
++  await BlogView.create({
++    blog: blogId,
++    visitorKey: visitorKey.trim(),
++    referrerSource,
++    isAdminView
++  })
++
++  return sendData(res, { message: SUCCESS_MESSAGES.VIEW_RECORDED })
++})

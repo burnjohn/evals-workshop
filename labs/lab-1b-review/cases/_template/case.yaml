@@ -1,0 +1,12 @@
+# One line: what this case tests
+source: synthetic            # real: taken from your project | synthetic: made up, say what it imitates
+from: imitates 02-view-tracking   # where it comes from: a PR, a bug report, or the real case it imitates
+input: input.patch           # the pull request, as a unified diff
+
+defects:                     # what a person says is wrong. [] means a clean change
+  - id: S1                   # unique in this lab
+    file: server/src/example.js
+    lines: [10, 12]          # the lines in the new file, as the patch numbers them
+    why: "One sentence: what breaks, and which rule or spec item says so."
+
+decoys: []                   # looks like a bug, is not: id, file, lines, match (regex on the title), why

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "api",
+    "task": "Return 404 when the profile does not exist.",
+    "skills": [
+      "api-rules"
+    ],
+    "owned": [
+      "api/"
+    ],
+    "file": "api/profile.js",
+    "expect": {
+      "rule": "code: \"E_",
+      "status": "done"
+    }
+  },
+  {
+    "id": "ui",
+    "task": "Add a Save button to the profile page.",
+    "skills": [
+      "ui-rules"
+    ],
+    "owned": [
+      "web/"
+    ],
+    "file": "web/profile.js",
+    "expect": {
+      "rule": "data-track",
+      "status": "done"
+    }
+  },
+  {
+    "id": "db",
+    "task": "Let an admin archive a profile. The row stays, the active list hides it, and archiving it again keeps the first archived_at.",
+    "skills": [
+      "db-rules"
+    ],
+    "owned": [
+      "db/"
+    ],
+    "file": "db/profiles.js",
+    "expect": "TODO: read plugin/skills/db-rules/SKILL.md. Which text must be in the code (rule)? done or blocked (status)?"
+  },
+  {
+    "id": "impossible",
+    "task": "Show the phone number from users.phone. (There is no such column, and you may not add one.)",
+    "skills": [],
+    "owned": [
+      "web/"
+    ],
+    "file": "web/profile.js",
+    "expect": {
+      "rule": null,
+      "status": "blocked"
+    }
+  }
+]
