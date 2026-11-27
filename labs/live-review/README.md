@@ -38,7 +38,7 @@ Models count diff lines a few off, so a bug is matched by file and topic, not by
 | caught bugs | ≥ base − 10 points, and ≥ 60% |
 | right severity | ≥ base − 15 points |
 | decoy flagged | ≤ base, plus 1 in 3 runs |
-| CRITICAL on a clean PR | ≤ base, plus 1 in 3 runs |
+| CRITICAL on a clean PR | shown, not blocking: on an unchanged skill it swings between 0% and 50% |
 
 `no-skill` is the control: it shows what the skill adds. It never blocks. The table goes to the job summary; the full matrix is the `live-review-matrix` artifact (`live.html`).
 
