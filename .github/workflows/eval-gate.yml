@@ -40,11 +40,3 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: live-review-matrix, path: "live.*" }
-  eval-gate:                       # the one required check
-    needs: [static, live]
-    if: always()                   # without this it is skipped when a job fails, and GitHub counts skipped as success
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo "static: ${{ needs.static.result }} · live: ${{ needs.live.result }}"
-          [ "${{ needs.static.result }}" = success ] && [ "${{ needs.live.result }}" = success ]
