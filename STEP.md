@@ -1,14 +1,12 @@
-# You are on `lab-1a-done`
+# You are on `lab-1b-start`
 
-## Lab 1A · `make-release`: what did it do?
-Read `labs/lab-1a-release/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
+## Lab 1B · `code-review`: what did it find, miss and invent?
+Read `labs/lab-1b-review/README.md` first. Every run is a real agent: Claude Code on Haiku, your login, `plugin/` as it is on disk.
 
-**The answer key is complete. Run it, break it, fix it.**
+**Your job: the answer key.** Read `cases/03-dashboard/input.patch` and `spec.md`. It has 3 defects. Write them in `cases/03-dashboard/case.yaml`: id, file, lines, why. Then compare two versions of the skill, and add cases: the prompts are in the README.
 
 ```bash
-npm test -- lab-1a           # green
+npm test -- lab-1b           # your todos show up here
 ```
 
-Break it: in `plugin/skills/make-release/SKILL.md`, delete step 5 (tag and push), and run it again. Then undo the edit: `git checkout plugin labs`.
-
-To label it yourself: `npm run step start`. Onwards: `npm run step next`
+Stuck? `npm run step done`
