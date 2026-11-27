@@ -1,0 +1,25 @@
+# The matrix for code-review (no skill, current, v2), live, on OpenRouter. Locally the same config runs on your Claude Code login.
+# It costs money and answers differently each run, so it never blocks a merge: start it by hand.
+# Needs the repository secret OPENROUTER_API_KEY.
+name: eval-matrix
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      MODEL: openrouter:anthropic/claude-haiku-5.5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Run the matrix (no-skill vs current vs v2, every case)
+        run: npx -y promptfoo@0.126.0 eval -c labs/lab-1b-review/promptfooconfig.yaml -r "$MODEL" --grader "$MODEL" -j 4 --no-cache -o matrix.html -o matrix.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: eval-matrix, path: "matrix.*" }
